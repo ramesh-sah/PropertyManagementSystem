@@ -8,4 +8,12 @@ def home(request):
 
 
 def propertyDetail(request):
-    return render(request, "property-details.html")
+    return render(request, "customer/property-details.html")
+
+
+def contactUs(request):
+    return render(request, "customer/contactus.html")
+
+
+def about(request):
+    return render(request, "customer/about.html")

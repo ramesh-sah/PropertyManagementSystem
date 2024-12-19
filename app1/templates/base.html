@@ -155,19 +155,38 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
+
+
+
         <div class="deznav">
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-<!--							<i class="flaticon-dashboard-1"></i>-->
+							<i class="flaticon-dashboard-1"></i>
 							<span class="nav-text">Dashboard</span>
 						</a>
+                        <ul aria-expanded="false">
+							<li><a href="index.html">Dashboard</a></li>
+							<li><a href="analytics.html">Analytics</a></li>
+							<li><a href="review.html">Review</a></li>
+							<li><a href="order-list.html">Order List</a></li>
+							<li><a href="customer-list.html">Customer</a></li>
+
+						</ul>
                     </li>
 					<li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
-
+                        <i class="flaticon-381-user-7"></i>
 							<span class="nav-text">Agents</span>
 
+
 						</a>
+                                                <ul aria-expanded="false">
+                            <li><a href="add-agent.html">Add Agent</a></li>
+                            <li><a href="add-agent-wizard.html">Add Agent Wizard</a></li>
+                            <li><a href="all-agents.html">All Agents</a></li>
+                            <li><a href="agent-profile.html">Agent Profile</a></li>
+
+                        </ul>
                     </li>
 					<li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
 							<i class="flaticon-381-layer-1"></i>
@@ -176,7 +195,7 @@
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="add-property.html">Add Property</a></li>
-                            <li><a href="property-list.html">Property List</a></li>
+                            <li><a href="{% url 'home' %}">Property List</a></li>
 							<li><a href="{% url 'property-detail' %}">Property Details</a></li>
 
                         </ul>
@@ -209,33 +228,19 @@
                             </li>
                         </ul>
                     </li>
-					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+
+					<li><a class="has-arrow ai-icon" href="{% url 'contact-us' %}" aria-expanded="false" >
 							<i class="flaticon-381-file"></i>
-							<span class="nav-text">Icons</span>
-
+							<span class="nav-text">Contact Us</span>
+                        </a>
 						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="flat-icons.html">Flaticons</a></li>
-                            <li><a href="svg-icons.html">SVG Icons</a></li>
-
-                        </ul>
                     </li>
 
-					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+					<li><a class="has-arrow ai-icon" href="{% url 'about' %}" aria-expanded="false">
 							<i class="flaticon-381-database-1"></i>
-							<span class="nav-text">CMS</span>
+							<span class="nav-text">About Us</span>
 
 						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="content.html">Content</a></li>
-                            <li><a href="content-add.html">Add Content</a></li>
-                            <li><a href="menu.html">Menus</a></li>
-                            <li><a href="email-template.html">Email Template</a></li>
-                            <li><a href="add-email.html">Add Email</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="add-blog.html">Add Blog</a></li>
-                            <li><a href="blog-category.html">Blog Category</a></li>
-                        </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-bar-chart-2"></i>
@@ -347,9 +352,11 @@
 
             Footer start
         ***********************************-->
+
         {% block content %}
 
         {% endblock %}
+
 
         <div class="footer">
             <div class="copyright">
@@ -379,6 +386,7 @@
     ***********************************-->
     <!-- Required vendors -->
 
+
     <script src="{% static 'vendor/global/global.min.js' %}"></script>
 	<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
 	<script src="{% static 'vendor/swiper/js/swiper-bundle.min.js' %}"></script>
@@ -388,67 +396,6 @@
 	<script src="{% static 'js/dashboard/cms.js' %}"></script>
     <script src="{% static 'js/custom.min.js' %}"></script>
 	<script src="{% static 'js/deznav-init.js' %}"></script>
-    <script>
-		var dragTapSlider = document.getElementById('combined2');
-		noUiSlider.create(dragTapSlider, {
-			start: [40, 60],
-			behaviour: 'drag-tap',
-			connect: true,
-			range: {
-				'min': 20,
-				'max': 80
-			}
-		});
 
-		var combined2Min = document.getElementById('slider-combined2-value-min'),
-		combined2Max = document.getElementById('slider-combined2-value-max');
-		dragTapSlider.noUiSlider.on('update', function (values, handle) {
-			if (handle) {
-				combined2Max.innerHTML = values[handle];
-			} else {
-				combined2Min.innerHTML = values[handle];
-			}
-		});
-
-		var dragTapSlider = document.getElementById('combined');
-		noUiSlider.create(dragTapSlider, {
-			start: [40, 60],
-			behaviour: 'drag-tap',
-			connect: true,
-			range: {
-				'min': 20,
-				'max': 80
-			}
-		});
-
-		var combinedMin = document.getElementById('slider-combined-value-min'),
-		combinedMax = document.getElementById('slider-combined-value-max');
-		dragTapSlider.noUiSlider.on('update', function (values, handle) {
-			if (handle) {
-				combinedMax.innerHTML = values[handle];
-			} else {
-				combinedMin.innerHTML = values[handle];
-			}
-		});
-	</script>
-	<script>
-		setTimeout(() => {
-			if(jQuery('.post-swiper').length > 0){
-				var swiper = new Swiper(".post-swiper", {
-					slidesPerView: 1,
-					spaceBetween: 0,
-					speed: 1500,
-					loop:true,
-					autoplay: {
-					   delay: 1500,
-					},
-					navigation: {
-						nextEl: '.menu-button-next',
-						prevEl: '.menu-button-prev',
-					},
-				});
-			}
-		}, 1000);
-	</script>
 
 </body>
