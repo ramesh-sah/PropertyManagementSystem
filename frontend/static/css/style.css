@@ -32652,7 +32652,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .property-card.style-1 .dz-media {
     position: relative; }
     .property-card.style-1 .dz-media img {
-      height: 100%;
+      height: 250px;
       object-fit: cover;
       width: 100%; }
     .property-card.style-1 .dz-media ul {

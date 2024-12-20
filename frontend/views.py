@@ -17,3 +17,11 @@ def contactUs(request):
 
 def about(request):
     return render(request, "customer/about.html")
+
+
+def login(request):
+    return render(request, "page-login.html")
+
+
+def register(request):
+    return render(request, "page-register.html")
