@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'enquiry',
     'organization',
     'property',
-    # 'frontend',
+    'frontend',
 ]
 
 MIDDLEWARE = [
