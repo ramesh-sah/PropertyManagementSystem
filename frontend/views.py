@@ -1,12 +1,30 @@
 from django.shortcuts import render
 
 
-# Create your views here.
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.views import View
+from propertymanagement.permisssions import IsAdminUser
+from django.core.exceptions import PermissionDenied
 
-def home(request):
-    return render(request, "property-list.html")
 
 
+class HomeView(View):
+    permission_check = IsAdminUser()
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            self.permission_check(request)  # Call the permission check
+        except PermissionDenied:
+            return HttpResponse("You do not have permission to access this page.", status=403)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request):
+        return render(request, "property-list.html")
+    
+    
+    
+    
 def propertyDetail(request):
     return render(request, "customer/property-details.html")
 
