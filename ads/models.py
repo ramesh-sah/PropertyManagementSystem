@@ -1,6 +1,8 @@
 from datetime import timezone
 from django.db import models
 
+from account.models import User
+
 # Create your models here.
 
 class Ads(models.Model):
