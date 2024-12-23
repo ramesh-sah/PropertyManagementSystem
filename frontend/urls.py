@@ -7,8 +7,6 @@ urlpatterns = [
     path('property-detail', views.propertyDetail, name='property-detail'),
     path('contact-us', views.contactUs, name='contact-us'),
     path('about', views.about, name='about'),
-    path('login', views.login, name='login'),
-    path('register', views.register, name='register'),
     path('add-property', views.addProperty, name='add-property'),
 
 ]

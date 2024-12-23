@@ -1,12 +1,10 @@
 from django.shortcuts import render
 
-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from propertymanagement.permisssions import IsAdminUser
 from django.core.exceptions import PermissionDenied
-
 
 
 class HomeView(View):
@@ -21,10 +19,8 @@ class HomeView(View):
 
     def get(self, request):
         return render(request, "property-list.html")
-    
-    
-    
-    
+
+
 def propertyDetail(request):
     return render(request, "customer/property-details.html")
 
@@ -36,13 +32,6 @@ def contactUs(request):
 def about(request):
     return render(request, "customer/about.html")
 
-
-def login(request):
-    return render(request, "login.html")
-
-
-def register(request):
-    return render(request, "register.html")
 
 def addProperty(request):
     return render(request, "admin/add-property.html")
