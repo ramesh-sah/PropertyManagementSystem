@@ -38,8 +38,11 @@ def about(request):
 
 
 def login(request):
-    return render(request, "page-login.html")
+    return render(request, "login.html")
 
 
 def register(request):
-    return render(request, "page-register.html")
+    return render(request, "register.html")
+
+def addProperty(request):
+    return render(request, "admin/add-property.html")

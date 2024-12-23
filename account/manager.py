@@ -13,6 +13,8 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, username, password=None, **extra_fields):
-        extra_fields.setdefault('user_type', 'admin')
+        extra_fields.setdefault('user_type', 'admin') 
+        extra_fields.setdefault('is_admin', True)  # Set is_admin to True
+        
 
         return self.create_user(email, username, password, **extra_fields)

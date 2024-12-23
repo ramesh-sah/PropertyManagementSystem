@@ -14,26 +14,28 @@ class User(AbstractBaseUser):
     user_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=128)  # Use Django's built-in password hashing
+    email = models.EmailField(unique=True,max_length=255, blank=False, null=False)
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     profile_picture = models.URLField(blank=True, null=True)
-    username = models.CharField(max_length=30, unique=True)
+    is_admin= models.BooleanField(default=False)
+    is_active= models.BooleanField(default=True)
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['user_type']
 
     def __str__(self):
         return self.email
     
     def has_perm(self, perm, obj=None):
         return self.is_admin
-    def has_module_parms(self, app_label):
+    def has_module_perms(self, app_label):
         return True
     @property
     def is_staff(self):
