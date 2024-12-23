@@ -66,13 +66,11 @@ class PropertyMedia(models.Model):
 class PropertyAmenities(models.Model):
     amenity_id = models.AutoField(primary_key=True)
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='amenities')
-    amenities_title=models.DateField(max_length=255)
-    amenities_description=models.TextField()
     amenities_status=models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
-    """ ac = models.BooleanField(default=False, help_text="A/C available")
+    ac = models.BooleanField(default=False, help_text="A/C available")
     heating = models.BooleanField(default=False, help_text="Heating available")
     garage = models.BooleanField(default=False, help_text="Garage available")
     swimming_pool = models.BooleanField(default=False, help_text="Swimming pool available")
@@ -90,7 +88,7 @@ class PropertyAmenities(models.Model):
     barbecue = models.BooleanField(default=False, help_text="Barbecue available")
     laundry_dryer = models.BooleanField(default=False, help_text="Laundry dryer available")
     lawn = models.BooleanField(default=False, help_text="Lawn available")
-    elevator = models.BooleanField(default=False, help_text="Elevator available")"""
+    elevator = models.BooleanField(default=False, help_text="Elevator available")
     
 
     def __str__(self):
