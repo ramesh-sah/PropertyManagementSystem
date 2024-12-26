@@ -6,7 +6,7 @@ from account.models import User
 
 class OrganizationDetails(models.Model):
     organization_id = models.AutoField(primary_key=True)
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization')
+    user= models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization')
     logo = models.ImageField(upload_to='logos/', blank=True, null=True, help_text="Upload the organization logo")
     name = models.CharField(max_length=255, help_text="Name of the organization")
     description = models.TextField(blank=True, null=True, help_text="Description of the organization")
@@ -37,9 +37,9 @@ class OrganizationRole(models.Model):
 
 class OrganizationTeamMember(models.Model):
     team_member_id = models.AutoField(primary_key=True)
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE, related_name='team_member')
-    organization_id = models.ForeignKey('OrganizationDetails', on_delete=models.CASCADE, related_name='team_members')
-    role_id = models.ForeignKey('OrganizationRole', on_delete=models.CASCADE, related_name='members')
+    user= models.OneToOneField(User, on_delete=models.CASCADE, related_name='team_member')
+    organization= models.ForeignKey('OrganizationDetails', on_delete=models.CASCADE, related_name='team_members')
+    role= models.ForeignKey('OrganizationRole', on_delete=models.CASCADE, related_name='members')
     bio = models.TextField(blank=True, null=True, help_text="Short biography of the team member")
     photo = models.ImageField(upload_to='team_photos/', blank=True, null=True, help_text="Upload member photo")
     start_date = models.DateField(blank=True, null=True, help_text="Date the team member started with the organization")
@@ -57,8 +57,8 @@ class OrganizationTeamMember(models.Model):
     
 class OrganizationSocialMedia(models.Model):
     org_social_media_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='social_media_links')
-    organization_id = models.ForeignKey('OrganizationDetails', on_delete=models.CASCADE, related_name='social_media_links')
+    user= models.ForeignKey(User, on_delete=models.CASCADE, related_name='social_media_links')
+    organization= models.ForeignKey('OrganizationDetails', on_delete=models.CASCADE, related_name='social_media_links')
     platform = models.CharField(max_length=50, help_text="Name of the social media platform")
     url = models.URLField(help_text="URL of the social media profile")
     created_at = models.DateTimeField(auto_now_add=True, help_text="Date the link was created")
@@ -69,8 +69,8 @@ class OrganizationSocialMedia(models.Model):
     
 class AboutOrganization(models.Model):
     about_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='about_organizations')
-    organization_id = models.ForeignKey('OrganizationDetails', on_delete=models.CASCADE, related_name='about_organizations')
+    user= models.ForeignKey(User, on_delete=models.CASCADE, related_name='about_organizations')
+    organization= models.ForeignKey('OrganizationDetails', on_delete=models.CASCADE, related_name='about_organizations')
     overview = models.TextField(blank=True, null=True, help_text="Brief overview of the organization")
     history = models.TextField(blank=True, null=True, help_text="Historical background of the organization")
     core_values = models.TextField(blank=True, null=True, help_text="Core values of the organization")
@@ -87,7 +87,7 @@ class AboutOrganization(models.Model):
 
 class OrganizationTermsAndConditions(models.Model):
     terms_id = models.AutoField(primary_key=True)
-    organization_id = models.ForeignKey('OrganizationDetails', on_delete=models.CASCADE, related_name='terms_conditions')
+    organization= models.ForeignKey('OrganizationDetails', on_delete=models.CASCADE, related_name='terms_conditions')
     content = models.TextField(blank=True, null=True, help_text="Content of the terms and conditions")
     created_at = models.DateTimeField(auto_now_add=True, help_text="Date when the terms were created")
     updated_at = models.DateTimeField(auto_now=True, help_text="Date when the terms were last updated")

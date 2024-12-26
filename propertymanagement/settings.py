@@ -41,10 +41,9 @@ INSTALLED_APPS = [
     # """ custom apps """
     'account',
     'ads',
-    'enquiry',
+    'contact_us',
     'organization',
     'property',
-    'frontend',
     
     # """ third-party packages """
     'django_filters',

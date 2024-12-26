@@ -60,15 +60,17 @@
               <div class="card-body">
                 <div class="text-center mb-3">
                   <a href="index-2.html"
-                    ><img class="logo-auth" src="images/logo-full.png" alt=""
+                    ><img class="logo-auth" src="static/images/logo-full.png" alt=""
                   /></a>
                 </div>
                 <h4 class="text-center mb-4">Sign in your account</h4>
-                <form>
+                <form method="POST" ">
+                  {% csrf_token %}
                   <div class="form-group mb-4">
                     <label class="form-label" for="username">Email</label>
                     <input
                       type="text"
+                      name="email"
                       class="form-control"
                       placeholder="Enter email"
                       id="username"
@@ -79,6 +81,7 @@
                     <div class="position-relative">
                       <input
                         type="password"
+                        name="password"
                         id="dz-password"
                         class="form-control"
                         value="Password"
@@ -117,7 +120,7 @@
                 <div class="new-account mt-3">
                   <p>
                     Don't have an account?
-                    <a class="text-primary" href="{% url 'register' %}"
+                    <a class="text-primary" href=""
                       >Sign up</a
                     >
                   </p>

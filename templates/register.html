@@ -63,13 +63,15 @@
                   /></a>
                 </div>
                 <h4 class="text-center mb-4">Sign up your account</h4>
-                <form>
+                <form method="POST" action="">
+                  {% csrf_token %}
                   <div class="form-group mb-4">
                     <label class="form-label" for="first_name"
                       >First Name</label
                     >
                     <input
                       type="text"
+                      name="firstname"
                       class="form-control"
                       placeholder="Enter first name"
                       id="first_name"
@@ -79,6 +81,7 @@
                     <label class="form-label" for="last_name">Last Name</label>
                     <input
                       type="text"
+                      name="lastname"
                       class="form-control"
                       placeholder="Enter last name"
                       id="last_name"
@@ -89,6 +92,7 @@
                     <label class="form-label" for="email">Email</label>
                     <input
                       type="email"
+                      name="email"
                       class="form-control"
                       placeholder="hello@example.com"
                       id="email"
@@ -104,7 +108,7 @@
                           type="radio"
                           class="form-check-input"
                           id="agent"
-                          name="user_type"
+                          name="usertype"
                           value="agent"
                           required=""
                         />
@@ -117,7 +121,7 @@
                           type="radio"
                           class="form-check-input"
                           id="customer"
-                          name="user_type"
+                          name="usertype"
                           value="customer"
                           required=""
                         />
@@ -133,7 +137,25 @@
                     <div class="position-relative">
                       <input
                         type="password"
+                        name="password"
                         id="dz-password"
+                        class="form-control"
+                        value="123456"
+                      />
+                      <span class="show-pass eye">
+                        <i class="fa fa-eye-slash"></i>
+                        <i class="fa fa-eye"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-sm-4 mb-3">
+                    <label class="form-label">Confirm Password</label>
+                    <div class="position-relative">
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        id="dz-confirm-password"
                         class="form-control"
                         value="123456"
                       />
@@ -153,7 +175,9 @@
                 <div class="new-account mt-3">
                   <p>
                     Already have an account?
-                    <a class="text-primary" href="page-login.html">Sign in</a>
+                    <a class="text-primary" href=""
+                      >Sign in</a
+                    >
                   </p>
                 </div>
               </div>

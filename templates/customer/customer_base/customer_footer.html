@@ -46,6 +46,68 @@
 {# Deznav initialization script #}
 <script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script> 
 {# Main script #}
+<script>
+      var dragTapSlider = document.getElementById("combined2");
+      noUiSlider.create(dragTapSlider, {
+        start: [40, 60],
+        behaviour: "drag-tap",
+        connect: true,
+        range: {
+          min: 20,
+          max: 80,
+        },
+      });
+
+      var combined2Min = document.getElementById("slider-combined2-value-min"),
+        combined2Max = document.getElementById("slider-combined2-value-max");
+      dragTapSlider.noUiSlider.on("update", function (values, handle) {
+        if (handle) {
+          combined2Max.innerHTML = values[handle];
+        } else {
+          combined2Min.innerHTML = values[handle];
+        }
+      });
+
+      var dragTapSlider = document.getElementById("combined");
+      noUiSlider.create(dragTapSlider, {
+        start: [40, 60],
+        behaviour: "drag-tap",
+        connect: true,
+        range: {
+          min: 20,
+          max: 80,
+        },
+      });
+
+      var combinedMin = document.getElementById("slider-combined-value-min"),
+        combinedMax = document.getElementById("slider-combined-value-max");
+      dragTapSlider.noUiSlider.on("update", function (values, handle) {
+        if (handle) {
+          combinedMax.innerHTML = values[handle];
+        } else {
+          combinedMin.innerHTML = values[handle];
+        }
+      });
+    </script>
+    <script>
+      setTimeout(() => {
+        if (jQuery(".post-swiper").length > 0) {
+          var swiper = new Swiper(".post-swiper", {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            speed: 1500,
+            loop: true,
+            autoplay: {
+              delay: 1500,
+            },
+            navigation: {
+              nextEl: ".menu-button-next",
+              prevEl: ".menu-button-prev",
+            },
+          });
+        }
+      }, 1000);
+    </script>
+  </body>
 
 
-</body>
