@@ -7,7 +7,7 @@ from account.models import User
 
 class Ads(models.Model):
     ad_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ads')
+    user= models.ForeignKey(User, on_delete=models.CASCADE, related_name='ads')
     title = models.CharField(max_length=200, help_text="Title of the ad")
     description = models.TextField(help_text="Detailed description of the ad")
     image = models.ImageField(upload_to='ads/images/', blank=True, null=True, help_text="Upload an image representing the ad")
