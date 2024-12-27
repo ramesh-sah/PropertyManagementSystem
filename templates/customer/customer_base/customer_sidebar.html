@@ -1,64 +1,84 @@
+<div class="deznav">
+  <div class="deznav-scroll">
+    <ul class="metismenu" id="menu">
+      <li>
+        <a
+          class="has-arrow ai-icon"
+          href='{% url "account:user-dashboard" %}'
+          aria-expanded="false"
+        >
+          <i class="flaticon-381-diamond"></i>
+          <span class="nav-text">Home </span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="has-arrow ai-icon"
+          href="javascript:void"
+          aria-expanded="false"
+        >
+          <i class="flaticon-381-layer-1"></i>
+          <span class="nav-text">Property</span>
+        </a>
+        <ul aria-expanded="false">
+          <li>
+            <a href='{% url "property:customer-list-property" %}'
+              >All Property</a
+            >
+          </li>
+          <li>
+            <a href='{% url "property:customer-detail-property" %}'
+              >Property Details</a
+            >
+          </li>
+          <li>
+            <a href='{% url "property:customer-enquiry-property" %}'
+              >Property Enquiry</a
+            >
+          </li>
+        </ul>
+      </li>
 
-        <div class="deznav">
-            <div class="deznav-scroll">
-				<ul class="metismenu" id="menu">
-                    <li><a class="has-arrow ai-icon" href='javascript:void()' aria-expanded="false">
-							<i class="flaticon-381-diamond"></i>
-							<span class="nav-text">Home
+      <li>
+        <a
+          class="has-arrow ai-icon"
+          href='{% url "contact_us:customer-contact" %}'
+          aria-expanded="false"
+        >
+          <i class="flaticon-381-dislike"></i>
+          <span class="nav-text">Contact Us</span>
+        </a>
+      </li>
 
-							</span>
-						</a>
-                        
-                    </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void" aria-expanded="false">
-							<i class="flaticon-381-layer-1"></i>
-							<span class="nav-text">All Property</span>
+      <li>
+        <a
+          class="has-arrow ai-icon"
+          href='{% url "organization:customer-about-us" %}'
+          aria-expanded="false"
+        >
+          <i class="flaticon-381-battery-5"></i>
+          <span class="nav-text">Terms Condition</span>
+        </a>
+      </li>
 
-						</a>
-                        <ul aria-expanded="false">
-                            
-							<li><a href= "" >Property Details</a></li>
-                            <li><a href="">Property Enquiry</a></li>
+      <li>
+        <a
+          class="has-arrow ai-icon"
+          href='{% url "organization:customer-organization-terms-condition" %}'
+          aria-expanded="false"
+        >
+          <i class="flaticon-381-calendar-4"></i>
+          <span class="nav-text">About Us</span>
+        </a>
+      </li>
+    </ul>
 
-                        </ul>
-                    </li>
-					
-                    
-                    
-                   
-
-					<li><a class="has-arrow ai-icon" href="javascript:void" aria-expanded="false" >
-							<i class="flaticon-381-dislike"></i>
-							<span class="nav-text">Contact Us</span>
-                        </a>
-						</a>
-                    </li>
-
-                   
-                     
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-battery-5"></i>
-							<span class="nav-text">Terms Condition</span>
-						</a>
-                        
-                    </li>
-
-					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-calendar-4"></i>
-							<span class="nav-text">About Us</span>
-
-						</a>
-                    </li>
-                    
-                   
-                    
-                    
-                   
-                </ul>
-
-				<div class="copyright">
-					<p><strong>Omah Dashboard</strong> © <span class="current-year">2024</span> All Rights Reserved</p>
-					<p>by DexignZone</p>
-				</div>
-			</div>
-        </div>
+    <div class="copyright">
+      <p>
+        <strong>Omah Dashboard</strong> ©
+        <span class="current-year">2024</span> All Rights Reserved
+      </p>
+      <p>by DexignZone</p>
+    </div>
+  </div>
+</div>

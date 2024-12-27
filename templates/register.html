@@ -46,7 +46,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="static/images/favicon.png"
+    />
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
   </head>
 
@@ -59,11 +64,14 @@
               <div class="card-body">
                 <div class="text-center mb-3">
                   <a href="index-2.html"
-                    ><img class="logo-auth" src="images/logo-full.png" alt=""
+                    ><img
+                      class="logo-auth"
+                      src="static/images/logo-full.png"
+                      alt=""
                   /></a>
                 </div>
                 <h4 class="text-center mb-4">Sign up your account</h4>
-                <form method="POST" action="">
+                <form method="POST" action="{% url 'account:user-register'%}">
                   {% csrf_token %}
                   <div class="form-group mb-4">
                     <label class="form-label" for="first_name"
@@ -71,20 +79,22 @@
                     >
                     <input
                       type="text"
-                      name="firstname"
+                      name="first_name"
                       class="form-control"
                       placeholder="Enter first name"
                       id="first_name"
+                      required=""
                     />
                   </div>
                   <div class="form-group mb-4">
                     <label class="form-label" for="last_name">Last Name</label>
                     <input
                       type="text"
-                      name="lastname"
+                      name="last_name"
                       class="form-control"
                       placeholder="Enter last name"
                       id="last_name"
+                      required=""
                     />
                   </div>
 
@@ -96,6 +106,7 @@
                       class="form-control"
                       placeholder="hello@example.com"
                       id="email"
+                      required=""
                     />
                   </div>
                   <div class="form-group mb-4">
@@ -108,7 +119,7 @@
                           type="radio"
                           class="form-check-input"
                           id="agent"
-                          name="usertype"
+                          name="user_type"
                           value="agent"
                           required=""
                         />
@@ -121,7 +132,7 @@
                           type="radio"
                           class="form-check-input"
                           id="customer"
-                          name="usertype"
+                          name="user_type"
                           value="customer"
                           required=""
                         />
@@ -140,7 +151,7 @@
                         name="password"
                         id="dz-password"
                         class="form-control"
-                        value="123456"
+                        required=""
                       />
                       <span class="show-pass eye">
                         <i class="fa fa-eye-slash"></i>
@@ -149,15 +160,16 @@
                     </div>
                   </div>
 
+
                   <div class="form-group mb-sm-4 mb-3">
-                    <label class="form-label">Confirm Password</label>
+                    <label class="form-label">Password</label>
                     <div class="position-relative">
                       <input
                         type="password"
-                        name="confirmPassword"
-                        id="dz-confirm-password"
+                        name="confirm_password"
+                        id="dz-password"
                         class="form-control"
-                        value="123456"
+                        required=""
                       />
                       <span class="show-pass eye">
                         <i class="fa fa-eye-slash"></i>
@@ -165,6 +177,8 @@
                       </span>
                     </div>
                   </div>
+
+              
 
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-block">
@@ -175,7 +189,9 @@
                 <div class="new-account mt-3">
                   <p>
                     Already have an account?
-                    <a class="text-primary" href=""
+                    <a
+                      class="text-primary"
+                      href="{% url 'account:user-login' %}"
                       >Sign in</a
                     >
                   </p>
@@ -191,9 +207,9 @@
 	Scripts
 ***********************************-->
     <!-- Required vendors -->
-    <script src="vendor/global/global.min.js"></script>
-    <script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/deznav-init.js"></script>
+    <script src="{% static 'vendor/global/global.min.js'%}"></script>
+    <script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js'%}"></script>
+    <script src="{% static 'js/custom.min.js'%}"></script>
+    <script src="{% static 'js/deznav-init.js}"></script>
   </body>
 </html>

@@ -19,23 +19,15 @@ class CustomerAdsView(View):
             ads = Ads.objects.all()
 
         return render(request, 'ads_list.html', {'ads': ads})
-class AgentAdsView(View):
+
+    
+    
+class AdminAddAdsView(View):
     def get(self, request, *args, **kwargs):
         """
-        Handles GET requests to display a list of ads.
-        Filters by `user_id` if provided in query parameters.
+        Handles GET requests to display the form to create a new ad.
         """
-        user_id = request.GET.get('user_id')
-
-        if user_id:
-            ads = Ads.objects.filter(user_id=user_id)
-        else:
-            ads = Ads.objects.all()
-
-        return render(request, 'ads_list.html', {'ads': ads})
-    
-    
-class AdminAdsView(View):
+        return render(request, 'admin/ads/add-ads.html')
     def post(self, request, *args, **kwargs):
         """
         Handles POST requests to create a new ad.
@@ -60,3 +52,13 @@ class AdminAdsView(View):
         )
 
         return redirect('ads_list')  # Redirect to the list view
+    
+    
+class AdminAdsListView(View):
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests to display a list of ads.
+        """
+        ads = Ads.objects.all()
+        return render(request, 'admin/ads/list-ads.html', {'ads': ads})
+    

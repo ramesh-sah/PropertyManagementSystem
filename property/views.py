@@ -5,7 +5,11 @@ from .models import Property, PropertyListingDetail, PropertyMedia, PropertyAmen
 from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest
 
-class AdminAddPropertyView(View):
+
+#admin views
+class AdminPropertyAddView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'admin/property/add-property.html')
     def post(self, request, *args, **kwargs):
         try:
             # Extracting main property request
@@ -95,3 +99,91 @@ class AdminAddPropertyView(View):
             return render(request, 'property/error.html', {
                 'error': str(e)
             }, status=400)
+            
+            
+
+
+class AdminPropertyListView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'admin/property/property-list.html')
+    
+
+class AdminPropertyEnquiryView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'admin/property/property-enquiry.html')
+    
+
+class AdminPropertyDetailView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'admin/property/property-details.html')
+    
+    
+class AdminPropertyCouponAddView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'admin/propertyCoupon/add-coupon.html')
+    
+class AdminPropertyCouponListView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'admin/propertyCoupon/list-coupon.html')
+    
+class AdminPropertyCouponUpdateView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'admin/propertyCoupon/update-coupon.html')
+    
+    
+    
+## Agent Views
+    
+    
+class AgentPropertyAddView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'agent/property/add-property.html')
+    
+    
+class AgentPropertyListView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'agent/property/property-list.html')
+
+
+
+class AgentPropertyEnquiryView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'agent/property/property-enquiry.html')
+    
+
+class AgentPropertyDetailView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'agent/property/property-details.html')
+
+class AgentPropertyCouponAddView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'agent/propertyCoupon/add-coupon.html')
+    
+class AgentPropertyCouponListView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'agent/propertyCoupon/list-coupon.html')
+    
+class AgentPropertyCouponUpdateView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'agent/propertyCoupon/update-coupon.html')
+    
+    
+    
+
+class CustomerPropertyListView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'customer/property/property-list.html')
+
+
+
+class CustomerPropertyDetailView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'customer/property/property-details.html')
+
+
+class CustomerPropertyEnquiryView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'customer/property/property-enquiry.html')
+    
+    
+    

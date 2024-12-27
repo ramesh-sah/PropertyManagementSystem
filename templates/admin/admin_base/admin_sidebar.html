@@ -2,22 +2,22 @@
         <div class="deznav">
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon inactive" href='{% url "account:admin-dashboard" %}' aria-expanded="false">
 							<i class="flaticon-381-diamond"></i>
-							<span class="nav-text">Dashboard</span>
-						</a>
+						 <span class="nav-text">Dashboard</span></a>
+						
                         
                     </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon " href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-381-layer-1"></i>
 							<span class="nav-text">Property</span>
 
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="add-property.html">Add Property</a></li>
-                            <li><a href="{% url 'home' %}">Property List</a></li>
-							<li><a href="{% url 'property-detail' %}">Property Details</a></li>
-                            <li><a href="{% url 'property-detail' %}">Property Enquiry</a></li>
+                            <li><a href='{% url "property:admin-add-property" %}'>Add Property</a></li>
+                            <li><a href='{% url "property:admin-list-property" %}'>Property List</a></li>
+							<li><a href='{% url "property:admin-detail-property" %}'>Property Details</a></li>
+                            <li><a href='{% url "property:admin-enquiry-property" %}'>Property Enquiry</a></li>
 
                         </ul>
                     </li>
@@ -29,13 +29,13 @@
 
 						</a>
                             <ul aria-expanded="false">
-                            <li><a href="add-agent.html">
+                            <li><a href='{% url "property:admin-property-coupon-list" %}'>
                                     All Coupon
                             </a></li>
-                            <li><a href="all-agents.html">
+                            <li><a href='{% url "property:admin-property-coupon-add" %}'>
                                 Add Coupon
                             </a></li>
-                            <li><a href="agent-profile.html">
+                            <li><a href='{% url "property:admin-property-coupon-update" %}'>
                                 Update Coupon
 
                             </a></li>
@@ -49,9 +49,9 @@
 
 						</a>
                             <ul aria-expanded="false">
-                            <li><a href="add-agent.html">Add Agent</a></li>
-                            <li><a href="all-agents.html">All Agents</a></li>
-                            <li><a href="agent-profile.html">Agent Profile</a></li>
+                            <li><a href='{% url "account:admin-add-agent" %}'>Add Agent</a></li>
+                            <li><a href='{% url "account:admin-list-agent" %}'>All Agents</a></li>
+                            <li><a href='{% url "account:admin-detail-agent" %}'>Agent Profile</a></li>
 
                         </ul>
                     </li>
@@ -61,10 +61,10 @@
 							<span class="nav-text">Customers</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="app-profile.html">Add Customer</a></li>
-							<li><a href="post-details.html">All Customer</a></li>
+                            <li><a href='{% url "account:admin-add-customer" %}'>Add Customer</a></li>
+							<li><a href='{% url "account:admin-list-customer" %}'>All Customer</a></li>
                            
-                            <li><a href="app-calender.html">Customer Profile</a></li>
+                            <li><a href='{% url "account:admin-detail-customer" %}'>Customer Profile</a></li>
 							
                         </ul>
                     </li>
@@ -73,15 +73,15 @@
 							<span class="nav-text">Ads</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="chart-flot.html">Add Ads</a></li>
-                            <li><a href="chart-morris.html">View All Ads</a></li>
+                            <li><a href='{% url "ads:admin-ads-add" %}'>Add Ads</a></li>
+                            <li><a href='{% url "ads:admin-ads-list" %}'>View All Ads</a></li>
                            
                         </ul>
                     </li>
 					
                    
 
-					<li><a class="has-arrow ai-icon" href="{% url 'contact-us' %}" aria-expanded="false" >
+					<li><a class="has-arrow ai-icon" href='{% url "contact_us:admin-contact-list" %}' aria-expanded="false" >
 							<i class="flaticon-381-dislike"></i>
 							<span class="nav-text">Contact Us</span>
                         </a>
@@ -93,23 +93,23 @@
 							<span class="nav-text">Organization</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="ui-accordion.html">Organization Role </a></li>
-                            <li><a href="ui-alert.html">Organization Team Member Add</a></li>
-                            <li><a href="ui-badge.html">Organization Details Add</a></li>
-                            <li><a href="ui-button.html">Organization SocialMedia Add</a></li>
+                            <li><a href='{% url "organization:organization-role" %}'>Organization Role </a></li>
+                            <li><a href='{% url "organization:organization-team-member" %}'>Organization Team Member Add</a></li>
+                            <li><a href='{% url "organization:organization-detail" %}'>Organization Details Add</a></li>
+                            <li><a href='{% url "organization:organization-social-media" %}'>Organization SocialMedia Add</a></li>
                            
 
                         </ul>
                     </li>
                      
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon" href='{% url "organization:organization-terms-condition" %}' aria-expanded="false">
 							<i class="flaticon-381-battery-5"></i>
 							<span class="nav-text">Terms Condition</span>
 						</a>
                         
                     </li>
 
-					<li><a class="has-arrow ai-icon" href="{% url 'about' %}" aria-expanded="false">
+					<li><a class="has-arrow ai-icon" href='{% url "organization:about-organization" %}' aria-expanded="false">
 							<i class="flaticon-381-calendar-4"></i>
 							<span class="nav-text">About Us</span>
 

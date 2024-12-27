@@ -28,7 +28,7 @@ class Property(models.Model):
     ]
 
     property_id = models.AutoField(primary_key=True)
-    agent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', limit_choices_to={'user_type': 'agent'})
+    agent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', limit_choices_to={'user_type': 'agent','user_type': 'admin'})
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=20, choices=PROPERTY_CATEGORIES)
@@ -61,8 +61,8 @@ class PropertyMedia(models.Model):
     media_id = models.AutoField(primary_key=True)
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='media')
     image_title = models.CharField(max_length=255, blank=True, null=True, help_text="Title for the image")
-    image_url = models.URLField(help_text="URL for the image")
-    video_upload = models.URLField(blank=True, null=True, help_text="URL for the uploaded video")
+    image = models.ImageField(upload_to='images/', help_text="Upload an image" ,null=True, blank=True)
+    video = models.FileField(upload_to='videos/', blank=True, null=True, help_text="Upload a video",)
     video_title = models.CharField(max_length=255, blank=True, null=True, help_text="Title for the video")
 
     def __str__(self):

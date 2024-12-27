@@ -4,29 +4,83 @@ from django.views import View
 from organization.models import AboutOrganization
 
 # Create your views here.
-###about organization
+# ###about organization
 
 
-class CustomerAboutOrganizationView(View):
+# class CustomerAboutOrganizationView(View):
+#     def get(self, request, *args, **kwargs):
+#         """
+#         Handles GET requests to display a list of AboutOrganization objects.
+#         Filters by `user_id` or `organization_id` if query parameters are provided.
+#         """
+#         user_id = request.GET.get('user_id')
+#         organization_id = request.GET.get('organization_id')
+
+#         if user_id:
+#             about_organizations = AboutOrganization.objects.filter(user_id=user_id)
+#         elif organization_id:
+#             about_organizations = AboutOrganization.objects.filter(organization_id=organization_id)
+#         else:
+#             about_organizations = AboutOrganization.objects.all()
+
+#         return render(request, 'customer/about.html', {
+#             'about_organizations': about_organizations
+#         })
+
+
+# class AgentAboutOrganizationView(View):
+#     def get(self, request, *args, **kwargs):
+#         """
+#         Handles GET requests to display a list of AboutOrganization objects.
+#         Filters by `user_id` or `organization_id` if query parameters are provided.
+#         """
+#         user_id = request.GET.get('user_id')
+#         organization_id = request.GET.get('organization_id')
+
+#         if user_id:
+#             about_organizations = AboutOrganization.objects.filter(user_id=user_id)
+#         elif organization_id:
+#             about_organizations = AboutOrganization.objects.filter(organization_id=organization_id)
+#         else:
+#             about_organizations = AboutOrganization.objects.all()
+
+#         return render(request, 'customer/about.html', {
+#             'about_organizations': about_organizations
+#         })
+        
+class AdminOrganizationRoleView(View):
+    def get(self, request, *args, **kwargs):
+        
+
+        return render(request, 'admin/organization/organization-role.html')
+    
+class AdminOrganizationDetailView(View):
+    def get(self, request, *args, **kwargs):
+        
+
+        return render(request, 'admin/organization/organization-details.html')
+    
+class AdminOrganizationSocialMedia(View):
+    def get(self, request, *args, **kwargs):
+        
+
+        return render(request, 'admin/organization/organization-social-media.html')
+    
+class AdminOrganizationTeamMember(View):
+    def get(self, request, *args, **kwargs):
+        
+
+        return render(request, 'admin/organization/organization-team-member-add.html')
+    
+    
+class AdminAboutOrganizationView(View):
     def get(self, request, *args, **kwargs):
         """
         Handles GET requests to display a list of AboutOrganization objects.
         Filters by `user_id` or `organization_id` if query parameters are provided.
         """
-        user_id = request.GET.get('user_id')
-        organization_id = request.GET.get('organization_id')
-
-        if user_id:
-            about_organizations = AboutOrganization.objects.filter(user_id=user_id)
-        elif organization_id:
-            about_organizations = AboutOrganization.objects.filter(organization_id=organization_id)
-        else:
-            about_organizations = AboutOrganization.objects.all()
-
-        return render(request, 'customer/about.html', {
-            'about_organizations': about_organizations
-        })
-class AdminAboutOrganizationView(View):
+        
+        return render(request, 'admin/about_us/about_us.html')
     def post(self, request, *args, **kwargs):
         """
         Handles POST requests to create a new AboutOrganization object.
@@ -57,24 +111,47 @@ class AdminAboutOrganizationView(View):
     
     
     
+class AdminOrganizationTermsConditionView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'admin/termsConditions/terms-conditions.html')
+    
+    
     
 
+class AgentOrganizationTermsConditionView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'agent/termsConditions/terms-conditions.html')
+    
+    
+    
 class AgentAboutOrganizationView(View):
     def get(self, request, *args, **kwargs):
         """
         Handles GET requests to display a list of AboutOrganization objects.
         Filters by `user_id` or `organization_id` if query parameters are provided.
         """
-        user_id = request.GET.get('user_id')
-        organization_id = request.GET.get('organization_id')
+        
+        return render(request, 'agent/about_us/about_us.html')
+    
+    
+    
+    
 
-        if user_id:
-            about_organizations = AboutOrganization.objects.filter(user_id=user_id)
-        elif organization_id:
-            about_organizations = AboutOrganization.objects.filter(organization_id=organization_id)
-        else:
-            about_organizations = AboutOrganization.objects.all()
 
-        return render(request, 'customer/about.html', {
-            'about_organizations': about_organizations
-        })
+
+class CustomerOrganizationTermsConditionView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'customer/termsConditions/terms-conditions.html')
+    
+    
+    
+class CustomerAboutOrganizationView(View):
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests to display a list of AboutOrganization objects.
+        Filters by `user_id` or `organization_id` if query parameters are provided.
+        """
+        
+        return render(request, 'customer/about_us/about_us.html')
+    
+    
