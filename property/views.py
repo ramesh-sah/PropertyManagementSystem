@@ -5,13 +5,20 @@ from .models import Property, PropertyListingDetail, PropertyMedia, PropertyAmen
 from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest
 
+
+class Home(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'landing.page.html')
+
+
 class AdminAddPropertyView(View):
     def post(self, request, *args, **kwargs):
         try:
             # Extracting main property request
             agent_id = request.POST.get("agent_id")
             agent = get_object_or_404(User, user_id=agent_id)  # Adjust field if needed
-            
+
             property_request = {
                 "agent": agent,
                 "title": request.POST.get("title"),

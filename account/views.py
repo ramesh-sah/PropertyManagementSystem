@@ -58,7 +58,8 @@ class UserRegistration(View):
 
         messages.success(request, 'Your account has been created successfully!')
         # return redirect('account:login')
-        return  HttpResponse("login success")
+        return HttpResponse("login success")
+
 
 class UserLogin(View):
 
@@ -85,14 +86,10 @@ class UserLogin(View):
             # If authentication fails
             messages.error(request, "Invalid email or password")
             # return redirect("account:login")
-            return  HttpResponse("login success")
+            return HttpResponse("login success")
+
+
 class UserDashboard(View):
-   
-    
-    
-    def get(self,request,*args,**kwargs):
-        
-        return render(request,'customer/dashboard/dashboard.html')
-    
-    
-    
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'customer/dashboard/dashboard.html')
