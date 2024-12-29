@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from organization.models import AboutOrganization
+from propertymanagement.permisssions import IsAdminUser, IsAgentUser, IsCustomerUser
+from django.core.exceptions import PermissionDenied
 
 # Create your views here.
 # ###about organization
@@ -49,24 +51,61 @@ from organization.models import AboutOrganization
 #         })
         
 class AdminOrganizationRoleView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         
 
         return render(request, 'admin/organization/organization-role.html')
     
 class AdminOrganizationDetailView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         
 
         return render(request, 'admin/organization/organization-details.html')
     
 class AdminOrganizationSocialMedia(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
+    
     def get(self, request, *args, **kwargs):
         
 
         return render(request, 'admin/organization/organization-social-media.html')
     
 class AdminOrganizationTeamMember(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         
 
@@ -74,6 +113,15 @@ class AdminOrganizationTeamMember(View):
     
     
 class AdminAboutOrganizationView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         """
         Handles GET requests to display a list of AboutOrganization objects.
@@ -112,6 +160,15 @@ class AdminAboutOrganizationView(View):
     
     
 class AdminOrganizationTermsConditionView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'admin/termsConditions/terms-conditions.html')
     
@@ -119,12 +176,30 @@ class AdminOrganizationTermsConditionView(View):
     
 
 class AgentOrganizationTermsConditionView(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'agent/termsConditions/terms-conditions.html')
     
     
     
 class AgentAboutOrganizationView(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         """
         Handles GET requests to display a list of AboutOrganization objects.
@@ -140,12 +215,30 @@ class AgentAboutOrganizationView(View):
 
 
 class CustomerOrganizationTermsConditionView(View):
+    permission_class = IsCustomerUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/termsConditions/terms-conditions.html')
     
     
     
 class CustomerAboutOrganizationView(View):
+    permission_class = IsCustomerUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         """
         Handles GET requests to display a list of AboutOrganization objects.

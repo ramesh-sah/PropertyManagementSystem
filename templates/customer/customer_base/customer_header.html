@@ -4,7 +4,8 @@
   <head>
     <!-- Title -->
     <title>
-      {% block title %} Omah - Real Estate Admin Dashboard Template {% endblock %}
+      {% block title %} Omah - Real Estate Admin Dashboard Template {% endblock
+      %}
     </title>
 
     <!-- Meta -->
@@ -168,7 +169,10 @@
                       <span class="ms-2">Profile </span>
                     </a>
 
-                    <a href="page-login.html" class="dropdown-item ai-icon">
+                    <a
+                      href='{% url "account:user-logout" %}'
+                      class="dropdown-item ai-icon"
+                    >
                       <svg
                         id="icon-logout"
                         xmlns="http://www.w3.org/2000/svg"
