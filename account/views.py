@@ -2,6 +2,13 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from account.models import User
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect
+from django.contrib.auth import logout
+from django.contrib import messages
+
+
+
 
 # Create your views here.
 
@@ -11,6 +18,8 @@ from django.contrib.auth.models import User
 import re
 from django.contrib.auth import get_user_model, authenticate, login
 from django.views import View
+
+from propertymanagement.permisssions import IsAdminUser, IsAgentUser, IsCustomerUser
 
 # Create your views here.
 
@@ -89,7 +98,7 @@ class UserLogin(View):
             print("Both fileds are reqired")
 
         user = authenticate(request, email=email, password=password)
-        print(user.last_name, user.first_name, user.user_type)
+        
 
         if user is not None:
             login(request, user)
@@ -106,10 +115,34 @@ class UserLogin(View):
         else:
             messages.error(request, "Invalid email or password")
             return redirect("account:user-login")
+        
+
+
+
+
+class UserLogout(View):
+
+    def get(self, request, *args, **kwargs):
+        # Check if the user is authenticated
+        if request.user.is_authenticated:
+            logout(request)  # Logs out the user
+            messages.success(request, "You have been logged out successfully.")
+        else:
+            messages.warning(request, "You are not logged in.")
+        
+        return redirect('account:user-login')  # Redirect to the login page or any other page
 
     
-    
 class AdminDashboard(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self,request,*args,**kwargs):
         
         return render(request,'admin/dashboard/dashboard.html')
@@ -117,6 +150,15 @@ class AdminDashboard(View):
     
     
 class AdminAddAgentView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     
     def get(self,request,*args,**kwargs):
         
@@ -124,12 +166,30 @@ class AdminAddAgentView(View):
     
     
 class AdminListAgentView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     
     def get(self,request,*args,**kwargs):
         
         return render(request,'admin/agents/list-agent.html')
     
 class AdminDetailAgentView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     
     def get(self,request,*args,**kwargs):
         
@@ -138,6 +198,15 @@ class AdminDetailAgentView(View):
     
     
 class AdminAddCustomerView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     
     def get(self,request,*args,**kwargs):
         
@@ -145,17 +214,44 @@ class AdminAddCustomerView(View):
     
     
 class AdminListCustomerView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     
     def get(self,request,*args,**kwargs):
         
         return render(request,'admin/customer/list-customer.html')
 class AdminDetailCustomerView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     
     def get(self,request,*args,**kwargs):
         
         return render(request,'admin/customer/customer-profile.html')
     
 class AdminProfileView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     
     def get(self,request,*args,**kwargs):
         
@@ -164,12 +260,31 @@ class AdminProfileView(View):
     
     
 class AgentDashboard(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
    
     def get(self,request,*args,**kwargs):
         
         return render(request,'agent/dashboard/dashboard.html')
     
 class AgentProfileView(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
+   
     
     def get(self,request,*args,**kwargs):
         
@@ -177,6 +292,16 @@ class AgentProfileView(View):
     
 
 class UserDashboard(View):
+    permission_class = IsCustomerUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        # try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        # except PermissionDenied:
+        #     return render(request, 'error/error_403.html', status=403)
+   
     
     def get(self,request,*args,**kwargs):
         
@@ -184,6 +309,15 @@ class UserDashboard(View):
     
     
 class CustomerProfileView(View):
+    permission_class = IsCustomerUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     
     def get(self,request,*args,**kwargs):
         

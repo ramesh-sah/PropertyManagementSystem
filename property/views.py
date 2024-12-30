@@ -1,13 +1,25 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.shortcuts import get_object_or_404
+
+from propertymanagement.permisssions import IsAdminUser, IsAgentUser, IsCustomerUser
 from .models import Property, PropertyListingDetail, PropertyMedia, PropertyAmenities, PropertyAddress
 from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest
+from django.core.exceptions import PermissionDenied
 
 
 #admin views
 class AdminPropertyAddView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'admin/property/add-property.html')
     def post(self, request, *args, **kwargs):
@@ -104,29 +116,83 @@ class AdminPropertyAddView(View):
 
 
 class AdminPropertyListView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'admin/property/property-list.html')
     
 
 class AdminPropertyEnquiryView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'admin/property/property-enquiry.html')
     
 
 class AdminPropertyDetailView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'admin/property/property-details.html')
     
     
 class AdminPropertyCouponAddView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'admin/propertyCoupon/add-coupon.html')
     
 class AdminPropertyCouponListView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'admin/propertyCoupon/list-coupon.html')
     
 class AdminPropertyCouponUpdateView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'admin/propertyCoupon/update-coupon.html')
     
@@ -136,34 +202,97 @@ class AdminPropertyCouponUpdateView(View):
     
     
 class AgentPropertyAddView(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'agent/property/add-property.html')
     
     
 class AgentPropertyListView(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'agent/property/property-list.html')
 
 
 
 class AgentPropertyEnquiryView(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'agent/property/property-enquiry.html')
     
 
 class AgentPropertyDetailView(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'agent/property/property-details.html')
 
 class AgentPropertyCouponAddView(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'agent/propertyCoupon/add-coupon.html')
     
 class AgentPropertyCouponListView(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'agent/propertyCoupon/list-coupon.html')
     
 class AgentPropertyCouponUpdateView(View):
+    permission_class = IsAgentUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'agent/propertyCoupon/update-coupon.html')
     
@@ -171,17 +300,44 @@ class AgentPropertyCouponUpdateView(View):
     
 
 class CustomerPropertyListView(View):
+    permission_class = IsCustomerUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/property/property-list.html')
 
 
 
 class CustomerPropertyDetailView(View):
+    permission_class = IsCustomerUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/property/property-details.html')
 
 
 class CustomerPropertyEnquiryView(View):
+    permission_class = IsCustomerUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/property/property-enquiry.html')
     

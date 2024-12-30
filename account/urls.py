@@ -1,7 +1,7 @@
 
 from django.urls import path
 
-from account.views import  AgentProfileView, CustomerProfileView, UserDashboard, UserLogin,UserRegistration,AgentDashboard,AdminDashboard,AdminAddAgentView,AdminListAgentView,AdminDetailAgentView,AdminAddCustomerView,AdminListCustomerView,AdminDetailCustomerView,AdminProfileView
+from account.views import  AgentProfileView, CustomerProfileView, UserDashboard, UserLogin, UserLogout,UserRegistration,AgentDashboard,AdminDashboard,AdminAddAgentView,AdminListAgentView,AdminDetailAgentView,AdminAddCustomerView,AdminListCustomerView,AdminDetailCustomerView,AdminProfileView
 
 
 app_name='account'
@@ -9,6 +9,7 @@ urlpatterns = [
 
     path('register/',UserRegistration.as_view(),name='user-register'),
     path('login/',UserLogin.as_view(),name='user-login'),
+    path('logout/',UserLogout.as_view(),name='user-logout'),
 
     path('admin-dashboard/',AdminDashboard.as_view(),name='admin-dashboard'),
     path('admin-add-agent/',AdminAddAgentView.as_view(),name='admin-add-agent'),

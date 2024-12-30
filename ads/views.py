@@ -2,27 +2,24 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from ads.models import Ads
+from propertymanagement.permisssions import IsAdminUser
+from django.core.exceptions import PermissionDenied
 
 # Create your views here.
 
-class CustomerAdsView(View):
-    def get(self, request, *args, **kwargs):
-        """
-        Handles GET requests to display a list of ads.
-        Filters by `user_id` if provided in query parameters.
-        """
-        user_id = request.GET.get('user_id')
-
-        if user_id:
-            ads = Ads.objects.filter(user_id=user_id)
-        else:
-            ads = Ads.objects.all()
-
-        return render(request, 'ads_list.html', {'ads': ads})
 
     
     
 class AdminAddAdsView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         """
         Handles GET requests to display the form to create a new ad.
@@ -55,6 +52,15 @@ class AdminAddAdsView(View):
     
     
 class AdminAdsListView(View):
+    permission_class = IsAdminUser()  # Define the permission class
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            if self.permission_class:
+                self.permission_class(request)  # Call the permission check
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         """
         Handles GET requests to display a list of ads.
@@ -62,3 +68,35 @@ class AdminAdsListView(View):
         ads = Ads.objects.all()
         return render(request, 'admin/ads/list-ads.html', {'ads': ads})
     
+class AgentAdsView(View):
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests to display a list of ads.
+        Filters by `user_id` if provided in query parameters.
+        """
+        user_id = request.GET.get('user_id')
+
+        if user_id:
+            ads = Ads.objects.filter(user_id=user_id)
+        else:
+            ads = Ads.objects.all()
+
+        return render(request, 'ads_list.html', {'ads': ads})
+    
+    
+    
+class CustomerAdsView(View):
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests to display a list of ads.
+        Filters by `user_id` if provided in query parameters.
+        """
+        user_id = request.GET.get('user_id')
+
+        if user_id:
+            ads = Ads.objects.filter(user_id=user_id)
+        else:
+            ads = Ads.objects.all()
+
+        return render(request, 'ads_list.html', {'ads': ads})
+
