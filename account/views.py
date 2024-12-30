@@ -98,7 +98,7 @@ class UserLogin(View):
             print("Both fileds are reqired")
 
         user = authenticate(request, email=email, password=password)
-        print(user.last_name, user.first_name, user.user_type)
+        
 
         if user is not None:
             login(request, user)
@@ -295,12 +295,12 @@ class UserDashboard(View):
     permission_class = IsCustomerUser()  # Define the permission class
 
     def dispatch(self, request, *args, **kwargs):
-        try:
+        # try:
             if self.permission_class:
                 self.permission_class(request)  # Call the permission check
             return super().dispatch(request, *args, **kwargs)
-        except PermissionDenied:
-            return render(request, 'error/error_403.html', status=403)
+        # except PermissionDenied:
+        #     return render(request, 'error/error_403.html', status=403)
    
     
     def get(self,request,*args,**kwargs):

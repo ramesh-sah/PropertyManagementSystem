@@ -1,4 +1,4 @@
-{% extends 'customer/customer_base/customer_base.html' %} {% block content %}
+{% extends 'customer/customer_base/customer_base.html' %} {% load static %}{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -116,11 +116,15 @@
     </style>
   </head>
   <body>
-    <main>
+<div class="content-body">
+  <div class="container-fluid">
+    <!-- row -->
+    <div class="row">
+      <main>
       <div class="slider-area" style="position: relative; height: 300px">
         <!-- Add your image here -->
         <img
-          src="static/images/property/4.jpg"
+          src="{% static 'images/property/4.jpg' %}"
           alt="Contact Us Image"
           style="width: 100%; height: 100%; object-fit: cover"
         />
@@ -243,7 +247,15 @@
         </div>
       </section>
     </main>
+    </div>
+    
+    
+  </div>
+</div>
   </body>
 </html>
 
 {% endblock %}
+
+
+    
