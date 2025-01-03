@@ -7,9 +7,22 @@ from .models import Property, PropertyListingDetail, PropertyMedia, PropertyAmen
 from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest
 from django.core.exceptions import PermissionDenied
+from django.contrib import messages
+
+from django.shortcuts import render, redirect
+from django.views import View
+from django.shortcuts import get_object_or_404
+
+from propertymanagement.permisssions import IsAdminUser, IsAgentUser, IsCustomerUser
+from .models import Property, PropertyListingDetail, PropertyMedia, PropertyAmenities, PropertyAddress, PropertyCoupon
+from django.contrib.auth.models import User
+from django.http import HttpResponseBadRequest
+from django.core.exceptions import PermissionDenied
+from decimal import Decimal
 
 
-#admin views
+
+# admin views
 class AdminPropertyAddView(View):
     permission_class = IsAdminUser()  # Define the permission class
 
@@ -20,98 +33,131 @@ class AdminPropertyAddView(View):
             return super().dispatch(request, *args, **kwargs)
         except PermissionDenied:
             return render(request, 'error/error_403.html', status=403)
+
     def get(self, request, *args, **kwargs):
         return render(request, 'admin/property/add-property.html')
+
     def post(self, request, *args, **kwargs):
-        try:
-            # Extracting main property request
-            agent_id = request.POST.get("agent_id")
-            agent = get_object_or_404(User, user_id=agent_id)  # Adjust field if needed
-            
-            property_request = {
-                "agent": agent,
-                "title": request.POST.get("title"),
-                "description": request.POST.get("description"),
-                "category": request.POST.get("category"),
-                "status": request.POST.get("status"),
-                "price": request.POST.get("price"),
-            }
+        title = request.POST.get('title')
+        status = request.POST.get('status')
+        category = request.POST.get('category')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        longitude = request.POST.get('longitude')
+        latitude = request.POST.get('latitude')
+        country = request.POST.get('country')
+        address = request.POST.get('address')
+        zipcode = request.POST.get('zipcode')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        coupon_code = request.POST.get('coupon')
+        percentage = request.POST.get('percentage')
+        valid_from = request.POST.get('valid_from')
+        valid_until = request.POST.get('valid_until')
 
-            # Create the Property instance
-            property_instance = Property.objects.create(**property_request)
+        # Retrieve additional features (checkboxes)
+        additional_features = request.POST.getlist('feature')  # This will return a list of selected features
 
-            # Create related listing details
-            listing_details_request = json.loads(request.POST.get("listing_details", "{}"))
-            PropertyListingDetail.objects.create(
-                property=property_instance,
-                size=listing_details_request.get("size"),
-                bedrooms=listing_details_request.get("bedrooms"),
-                kitchens=listing_details_request.get("kitchens"),
-                store_rooms=listing_details_request.get("store_rooms"),
-                halls=listing_details_request.get("halls"),
-                floors_no=listing_details_request.get("floors_no"),
-            )
+        # Create Property instance
+        property_instance = Property.objects.create(
+            agent=request.user,  # Assuming the logged-in user is an agent
+            title=title,
+            status=status,
+            category=category,
+            description=description,
+            price=Decimal(price) if price else None,
+        )
 
-            # Create related property media
-            media_request = json.loads(request.POST.get("media", "[]"))
-            for media in media_request:
+        # PropertyListingDetail data (No need to repeat property data here)
+        area = request.POST.get('area')
+        bedroom = request.POST.get('bedroom')
+        kitchen = request.POST.get('kitchen')
+        storeroom = request.POST.get('storeroom')
+        halls = request.POST.get('halls')
+        floor = request.POST.get('floor')
+        bathroom = request.POST.get('bathroom')
+
+        # Create PropertyListingDetail instance
+        PropertyListingDetail.objects.create(
+            property=property_instance,
+            size=area,
+            bedrooms=bedroom,
+            kitchens=kitchen,
+            store_rooms=storeroom,
+            halls=halls,
+            floors_no=floor
+        )
+
+        # PropertyMedia (Images and Videos)
+        images = request.FILES.getlist('images')  # Multiple image uploads
+        video = request.FILES.get('video')  # Single video upload
+
+        if images:
+            for image in images:
                 PropertyMedia.objects.create(
                     property=property_instance,
-                    image_title=media.get("image_title"),
-                    image_url=media.get("image_url"),
-                    video_upload=media.get("video_upload"),
-                    video_title=media.get("video_title"),
+                    image=image
                 )
 
-            # Create related property amenities
-            amenities_request = json.loads(request.POST.get("amenities", "{}"))
-            PropertyAmenities.objects.create(
+        if video:
+            PropertyMedia.objects.create(
                 property=property_instance,
-                ac=amenities_request.get("ac", False),
-                heating=amenities_request.get("heating", False),
-                garage=amenities_request.get("garage", False),
-                swimming_pool=amenities_request.get("swimming_pool", False),
-                parking=amenities_request.get("parking", False),
-                lake_view=amenities_request.get("lake_view", False),
-                garden=amenities_request.get("garden", False),
-                disabled_access=amenities_request.get("disabled_access", False),
-                lift=amenities_request.get("lift", False),
-                pet_friendly=amenities_request.get("pet_friendly", False),
-                ceiling_height=amenities_request.get("ceiling_height"),
-                outdoor_shower=amenities_request.get("outdoor_shower", False),
-                refrigerator=amenities_request.get("refrigerator", False),
-                wifi=amenities_request.get("wifi", False),
-                tv_cable=amenities_request.get("tv_cable", False),
-                barbecue=amenities_request.get("barbecue", False),
-                laundry_dryer=amenities_request.get("laundry_dryer", False),
-                lawn=amenities_request.get("lawn", False),
-                elevator=amenities_request.get("elevator", False),
+                video=video
             )
 
-            # Create related property address
-            address_request = json.loads(request.POST.get("address", "{}"))
-            PropertyAddress.objects.create(
-                property=property_instance,
-                address=address_request.get("address"),
-                country=address_request.get("country"),
-                city=address_request.get("city"),
-                zip_code=address_request.get("zip_code"),
-                state=address_request.get("state"),
-                latitude=address_request.get("latitude"),
-                longitude=address_request.get("longitude"),
-            )
+        # PropertyAmenities (Features)
+        amenities_data = {
+            'ac': 'ac' in request.POST,
+            'heating': 'heating' in request.POST,
+            'garage': 'garage' in request.POST,
+            'swimming_pool': 'swimming_pool' in request.POST,
+            'parking': 'parking' in request.POST,
+            'lake_view': 'lake_view' in request.POST,
+            'garden': 'garden' in request.POST,
+            'disabled_access': 'disabled_access' in request.POST,
+            'lift': 'lift' in request.POST,
+            'pet_friendly': 'pet_friendly' in request.POST,
+            'ceiling_height': request.POST.get('ceiling_height'),
+            'outdoor_shower': 'outdoor_shower' in request.POST,
+            'refrigerator': 'refrigerator' in request.POST,
+            'wifi': 'wifi' in request.POST,
+            'tv_cable': 'tv_cable' in request.POST,
+            'barbecue': 'barbecue' in request.POST,
+            'laundry_dryer': 'laundry_dryer' in request.POST,
+            'lawn': 'lawn' in request.POST,
+            'elevator': 'elevator' in request.POST,
+        }
 
-            # Redirect to a success page or render a template
-            return render(request, 'property/success.html', {
-                'property': property_instance,
-                'message': 'Property added successfully.'
-            })
+        PropertyAmenities.objects.create(property=property_instance, **amenities_data)
 
-        except Exception as e:
-            return render(request, 'property/error.html', {
-                'error': str(e)
-            }, status=400)
-            
+        # PropertyAddress data
+        address_data = {
+            'property': property_instance,
+            'address': address,
+            'country': country,
+            'zip_code': zipcode,
+            'city': city,
+            'state': state,
+            'latitude': latitude,
+            'longitude': longitude,
+        }
+        PropertyAddress.objects.create(**address_data)
+
+        # PropertyCoupon (Discounts)
+        # if coupon_code:
+        #     PropertyCoupon.objects.create(
+        #         property=property_instance,
+        #         code=coupon_code,
+        #         coupon_type=request.POST.get('coupon_type'),
+        #         discount_amount=request.POST.get('discount_amount'),
+        #         discount_percentage=percentage,
+        #         valid_from=valid_from,
+        #         valid_until=valid_until
+        #     )
+
+        messages.success(request, "Property added successfully")
+        return render(request, 'admin/property/add-property.html')
+
             
 
 
@@ -215,6 +261,129 @@ class AgentPropertyAddView(View):
         return render(request, 'agent/property/add-property.html')
     
     
+    def post(self, request, *args, **kwargs):
+        title = request.POST.get('title')
+        status = request.POST.get('status')
+        category = request.POST.get('category')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        longitude = request.POST.get('longitude')
+        latitude = request.POST.get('latitude')
+        country = request.POST.get('country')
+        address = request.POST.get('address')
+        zipcode = request.POST.get('zipcode')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        coupon_code = request.POST.get('coupon')
+        percentage = request.POST.get('percentage')
+        valid_from = request.POST.get('valid_from')
+        valid_until = request.POST.get('valid_until')
+
+        # Retrieve additional features (checkboxes)
+        additional_features = request.POST.getlist('feature')  # This will return a list of selected features
+
+        # Create Property instance
+        property_instance = Property.objects.create(
+            agent=request.user,  # Assuming the logged-in user is an agent
+            title=title,
+            status=status,
+            category=category,
+            description=description,
+            price=Decimal(price) if price else None,
+        )
+
+        # PropertyListingDetail data (No need to repeat property data here)
+        area = request.POST.get('area')
+        bedroom = request.POST.get('bedroom')
+        kitchen = request.POST.get('kitchen')
+        storeroom = request.POST.get('storeroom')
+        halls = request.POST.get('halls')
+        floor = request.POST.get('floor')
+        bathroom = request.POST.get('bathroom')
+
+        # Create PropertyListingDetail instance
+        PropertyListingDetail.objects.create(
+            property=property_instance,
+            size=area,
+            bedrooms=bedroom,
+            kitchens=kitchen,
+            store_rooms=storeroom,
+            halls=halls,
+            floors_no=floor
+        )
+
+        # PropertyMedia (Images and Videos)
+        images = request.FILES.getlist('images')  # Multiple image uploads
+        video = request.FILES.get('video')  # Single video upload
+
+        if images:
+            for image in images:
+                PropertyMedia.objects.create(
+                    property=property_instance,
+                    image=image
+                )
+
+        if video:
+            PropertyMedia.objects.create(
+                property=property_instance,
+                video=video
+            )
+
+        # PropertyAmenities (Features)
+        amenities_data = {
+            'ac': 'ac' in request.POST,
+            'heating': 'heating' in request.POST,
+            'garage': 'garage' in request.POST,
+            'swimming_pool': 'swimming_pool' in request.POST,
+            'parking': 'parking' in request.POST,
+            'lake_view': 'lake_view' in request.POST,
+            'garden': 'garden' in request.POST,
+            'disabled_access': 'disabled_access' in request.POST,
+            'lift': 'lift' in request.POST,
+            'pet_friendly': 'pet_friendly' in request.POST,
+            'ceiling_height': request.POST.get('ceiling_height'),
+            'outdoor_shower': 'outdoor_shower' in request.POST,
+            'refrigerator': 'refrigerator' in request.POST,
+            'wifi': 'wifi' in request.POST,
+            'tv_cable': 'tv_cable' in request.POST,
+            'barbecue': 'barbecue' in request.POST,
+            'laundry_dryer': 'laundry_dryer' in request.POST,
+            'lawn': 'lawn' in request.POST,
+            'elevator': 'elevator' in request.POST,
+        }
+
+        PropertyAmenities.objects.create(property=property_instance, **amenities_data)
+
+        # PropertyAddress data
+        address_data = {
+            'property': property_instance,
+            'address': address,
+            'country': country,
+            'zip_code': zipcode,
+            'city': city,
+            'state': state,
+            'latitude': latitude,
+            'longitude': longitude,
+        }
+        PropertyAddress.objects.create(**address_data)
+
+        # PropertyCoupon (Discounts)
+        # if coupon_code:
+        #     PropertyCoupon.objects.create(
+        #         property=property_instance,
+        #         code=coupon_code,
+        #         coupon_type=request.POST.get('coupon_type'),
+        #         discount_amount=request.POST.get('discount_amount'),
+        #         discount_percentage=percentage,
+        #         valid_from=valid_from,
+        #         valid_until=valid_until
+        #     )
+
+        messages.success(request, "Property added successfully")
+        return render(request, 'agent/property/add-property.html')
+
+    
+    
 class AgentPropertyListView(View):
     permission_class = IsAgentUser()  # Define the permission class
 
@@ -226,7 +395,9 @@ class AgentPropertyListView(View):
         except PermissionDenied:
             return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
-        return render(request, 'agent/property/property-list.html')
+        agent_property=Property.objects.filter(agent=request.user)
+        return render(request, 'agent/property/property-list.html',{'agent_property':agent_property})
+        
 
 
 
