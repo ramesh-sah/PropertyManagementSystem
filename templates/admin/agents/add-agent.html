@@ -11,103 +11,226 @@
                                 <h4 class="card-title">Add Agent</h4>
                             </div>
                             <div class="card-body">
-								<form>
+								<form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
 									<div class="row">
 										<div class="mb-3 col-lg-4 col-md-6">
-											<label class="form-label">Property Type</label>
-											<input type="text" class="form-control" placeholder="office,villa,apartment" required="">
+											<label class="form-label">First Name</label>
+											<input type="text" class="form-control" name='first_name'		placeholder="Enter First Name" required="">
 										</div>
 										<div class="mb-3 col-lg-4 col-md-6">
-											<label class="form-label">Property Status</label>
-											<select class="default-select  form-control wide" >
-												<option>For Rent</option>
-												<option>For Sale</option>
-											</select>
+											<label class="form-label">Last Name</label>
+											<input type="text" class="form-control" name='last_name'		placeholder="Enter Last Name" required="">
 										</div>
 										<div class="mb-3 col-lg-4 col-md-6">
-											<label class="form-label">Property Price</label>
-											<input type="text" class="form-control" placeholder="$2800" required="">
-										</div>
-										<div class="mb-3 col-lg-4 col-md-6">
-											<label class="form-label">Max Rooms</label>
-											<select class="default-select  form-control wide" >
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-												<option>6</option>
-											</select>
-										</div>
-										<div class="mb-3 col-lg-4 col-md-6">
-											<label class="form-label">Beds</label>
-											<select class="default-select  form-control wide" >
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-												<option>6</option>
-											</select>
-										</div>
-										<div class="mb-3 col-lg-4 col-md-6">
-											<label class="form-label">Baths</label>
-											<select class="default-select  form-control wide" >
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-												<option>6</option>
-											</select>
-										</div>
-										<div class="mb-3 col-lg-4 col-md-6">
-											<label class="form-label">Area</label>
-											<input type="text" class="form-control" placeholder="85 sq ft">
-										</div>
-										<div class="mb-3 col-lg-4 col-md-6">
-											<label class="form-label">Price</label>
-											 <input type="text" class="form-control" placeholder="$3000">
-										</div>
-										<div class="mb-3 col-lg-4 col-md-6">
-											<label class="form-label">Premiere</label>
-											<select class="default-select  form-control wide" >
-												<option>Blue Sky</option>
-												<option>Zephyr</option>
-												<option>Premiere</option>
-											</select>
-										</div>
-										<div class="mb-3 col-12">
-											<label class="form-label">Description</label>
-											<textarea class="form-control" rows="4"></textarea>
-										</div>
-										<div class="mb-3 col-sm-6">
-											<label class="form-label">Address</label>
-											<input type="text" class="form-control" placeholder="Address of your property">
-										</div>
-										<div class="mb-3 col-sm-6">
-											<label class="form-label">Zip Code</label>
-											<input type="code" id="zip_code" class="form-control" placeholder="Enter pin code" required="">
+											<label class="form-label">Email</label>
+											<input type="email" class="form-control" name='email'		placeholder="Enter Agent Email" required="">
 										</div>
 										
-									</div>
-								</form>
-								<div class="dropzone-admin mb-3">
-									<label class="form-label">Media</label>
-									<form class="dropzone" id="multiFileUpload" action="https://omah.dexignzone.com/upload.php">
-										<div class="dz-message needsclick"><i class="fas fa-cloud-upload-alt"></i>
-										<h6>Drop files here or click to upload.</h6>
+										<div class="mb-3 col-lg-4 col-md-6">
+											<label class="form-label">Password</label>
+											<input 
+											name='password'
+											type="password" class="form-control" placeholder="****" required="">
 										</div>
-									</form>
-								</div>  
-								<div class="	pt-3">
-									<button type="button" class="btn btn-sm btn-primary me-2">Submit</button>
+										<div class="mb-3 col-lg-4 col-md-6">
+											<label class="form-label">Phone Number</label>
+											<input type="tel" 
+											name="phone_number"
+											class="form-control" placeholder="Enter Phone Number" required="">
+										</div>
+										<div class="mb-3 col-lg-4 col-md-6">
+											<label class="form-label">Address</label>
+											<input type="text" class="form-control" placeholder="Enter Address" 
+											required=""
+											name="address"
+											>
+										</div>
+
+										
+										
+										
+										<div class="mb-3 col-lg-4 col-md-6">
+											<label class="form-label">Country</label>
+											<select class="default-select  form-control wide" name="country">
+												 <option value="" disabled selected>Select a country</option>
+            <option value="nepal">Nepal</option>
+            <option value="india">India</option>
+            <option value="china">China</option>
+            <option value="bhutan">Bhutan</option>
+            <option value="bangladesh">Bangladesh</option>
+											</select>
+										</div> 
+										 
+										
+										<div class="mb-3 col-lg-4 col-md-6">
+											<label class="form-label">City</label>
+											<select class="default-select  form-control wide" name="city">
+												 <option value="" disabled selected>Select a city</option>
+            <!-- Cities in Nepal -->
+          
+                <option value="kathmandu">Kathmandu</option>
+                <option value="pokhara">Pokhara</option>
+                <option value="bhaktapur">Bhaktapur</option>
+                <option value="lalitpur">Lalitpur</option>
+                <option value="biratnagar">Biratnagar</option>
+           
+            <!-- Cities in India -->
+           
+                <option value="delhi">Delhi</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="bangalore">Bangalore</option>
+                <option value="kolkata">Kolkata</option>
+                <option value="chennai">Chennai</option>
+            
+            <!-- Cities in China -->
+            
+                <option value="beijing">Beijing</option>
+                <option value="shanghai">Shanghai</option>
+                <option value="guangzhou">Guangzhou</option>
+                <option value="shenzhen">Shenzhen</option>
+                <option value="chengdu">Chengdu</option>
+           
+            <!-- Cities in Bhutan -->
+          
+                <option value="thimphu">Thimphu</option>
+                <option value="paro">Paro</option>
+                <option value="punakha">Punakha</option>
+                <option value="wangdue">Wangdue</option>
+                <option value="phuentsholing">Phuentsholing</option>
+           
+            <!-- Cities in Bangladesh -->
+            
+                <option value="dhaka">Dhaka</option>
+                <option value="chittagong">Chittagong</option>
+                <option value="khulna">Khulna</option>
+                <option value="rajshahi">Rajshahi</option>
+                <option value="sylhet">Sylhet</option>
+            
+											</select>
+										</div> 
+										<div class="mb-3 col-lg-4 col-md-6">
+											<label class="form-label">State</label>
+											<select class="default-select  form-control wide" name="state"> >
+												 <option value="" disabled selected>Select a state</option>
+            <!-- States in Nepal -->
+          
+                <option value="bagmati">Bagmati</option>
+                <option value="lumbini">Lumbini</option>
+                <option value="gandaki">Gandaki</option>
+                <option value="karnali">Karnali</option>
+                <option value="province-2">Province 2</option>
+          
+
+            <!-- States in India -->
+            
+                <option value="delhi">Delhi</option>
+                <option value="maharashtra">Maharashtra</option>
+                <option value="west-bengal">West Bengal</option>
+                <option value="tamil-nadu">Tamil Nadu</option>
+                <option value="karnataka">Karnataka</option>
+           
+
+            <!-- States in China -->
+            
+                <option value="beijing">Beijing</option>
+                <option value="shanghai">Shanghai</option>
+                <option value="guangdong">Guangdong</option>
+                <option value="jiangsu">Jiangsu</option>
+                <option value="sichuan">Sichuan</option>
+      
+
+            <!-- States in Bhutan -->
+            
+                <option value="thimphu">Thimphu</option>
+                <option value="paro">Paro</option>
+                <option value="punakha">Punakha</option>
+                <option value="wangdue">Wangdue</option>
+                <option value="phuentsholing">Phuentsholing</option>
+        
+
+            <!-- States in Bangladesh -->
+            
+                <option value="dhaka">Dhaka</option>
+                <option value="chittagong">Chittagong</option>
+                <option value="khulna">Khulna</option>
+                <option value="rajshahi">Rajshahi</option>
+                <option value="sylhet">Sylhet</option>
+            
+            
+											</select>
+										</div>
+										<div class="mb-3 col-lg-4 col-md-6">
+											<label class="form-label">Zip Code</label>
+											<input type="text" class="form-control" name='zip_code'		placeholder="Enter Zip Code" required="">
+										</div> 
+										
+										<div class="mb-3 col-sm-6">
+											<label class="form-label">Profile Picture</label>
+											<input type="file" class="form-control" placeholder="Upload Profile Picture" accept="image/*" name="profile_picture">
+										</div>
+
+										<div class="mb-3  col-md-6">
+    <label class="form-label">Social Media</label>
+    <div class="row">
+        <!-- First Part with 3 checkboxes -->
+        <div class="col-3">
+            <div>
+                <input type="checkbox" id="facebook" value="facebook" class="social-media-checkbox" name="social_media_facebook">
+                <label for="facebook">Facebook</label>
+            </div>
+        </div>
+        <div class="col-3">
+            <div>
+                <input type="checkbox" id="whatsapp" value="whatsapp" class="social-media-checkbox" name="social_media_whatsapp">
+                <label for="whatsapp">WhatsApp</label>
+            </div>
+        </div>
+        <div class="col-3">
+            <div>
+                <input type="checkbox" id="instagram" value="instagram" class="social-media-checkbox" name="social_media_instagram">
+                <label for="instagram">Instagram</label>
+            </div>
+        </div>
+
+        <!-- Second Part with 2 checkboxes -->
+        <div class="col-3">
+            <div>
+                <input type="checkbox" id="linkedin" value="linkedin" class="social-media-checkbox" name="social_media_linkedin">
+                <label for="linkedin">LinkedIn</label>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div id="socialMediaUrls">
+    <!-- Dynamic input fields for social media URLs will appear here -->
+</div>
+
+
+										<div class="	pt-3">
+									<button type="submit" class="btn btn-sm btn-primary me-2">Submit</button>
 									<button type="button" class="btn btn-sm btn-danger light">Cancel</button>
 								</div>
+
+								
+										
+									</div>
+									<div class="dropzone-admin mb-3">
+									
+								
+								
 							</div>
                         </div>
 					</div>
 				</div>
             </div>
+              
         </div>
+
+      
+
+		
+
         {% endblock %}

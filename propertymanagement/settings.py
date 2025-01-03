@@ -77,6 +77,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'property.context_processor.properties',  # Add this line
                 'account.context_processor.accounts',  # Add this line
+                'account.context_processor.user_profile_context', 
+                
             ],
         },
     },
@@ -133,10 +135,19 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')  # For production
 
+
+import os
+
+# Media files URL and root
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 
 
 # Custom user model

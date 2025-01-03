@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.views import View
-
+from django.core.paginator import Paginator
 from ads.models import Ads
 from propertymanagement.permisssions import IsAdminUser
 from django.core.exceptions import PermissionDenied
@@ -30,8 +30,8 @@ class AdminAddAdsView(View):
         Handles POST requests to create a new ad.
         Extracts data from `request.POST` and `request.FILES`.
         """
-        user_id = request.POST.get('user_id')
-        title = request.POST.get('title')
+        user = request.user
+        title = request.POST.get('ads_title')
         description = request.POST.get('description')
         image = request.FILES.get('image')
         url = request.POST.get('url')
@@ -39,7 +39,7 @@ class AdminAddAdsView(View):
         end_date = request.POST.get('end_date')
 
         Ads.objects.create(
-            user_id_id=user_id,  # ForeignKey requires the ID
+            user=user,# ForeignKey requires the ID
             title=title,
             description=description,
             image=image,
@@ -48,7 +48,7 @@ class AdminAddAdsView(View):
             end_date=end_date
         )
 
-        return redirect('ads_list')  # Redirect to the list view
+        return redirect('ads:admin-ads-add')  # Redirect to the list view
     
     
 class AdminAdsListView(View):
@@ -63,10 +63,22 @@ class AdminAdsListView(View):
             return render(request, 'error/error_403.html', status=403)
     def get(self, request, *args, **kwargs):
         """
-        Handles GET requests to display a list of ads.
+        Handles GET requests to display a list of ads with pagination.
         """
-        ads = Ads.objects.all()
-        return render(request, 'admin/ads/list-ads.html', {'ads': ads})
+        # Fetch all ads, ordered by newest first
+        ads = Ads.objects.all().order_by('-created_at')
+        
+        
+        
+        # Pagination setup
+        page_number = request.GET.get('page', 1)  # Default to the first page
+        paginator = Paginator(ads, 10)  # Show 10 ads per page
+        
+        # Get the page object for the current page
+        page_obj = paginator.get_page(page_number)
+        
+        # Render the template with the ads for the current page
+        return render(request, 'admin/ads/list-ads.html', {'ads': page_obj})
     
 class AgentAdsView(View):
     def get(self, request, *args, **kwargs):

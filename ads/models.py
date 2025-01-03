@@ -1,7 +1,10 @@
-from datetime import timezone
-from django.db import models
 
+from django.db import models
+from django.utils import timezone
+from django.utils import timezone
+from datetime import datetime
 from account.models import User
+from django.utils.timezone import make_aware, is_naive
 
 # Create your models here.
 
@@ -18,10 +21,28 @@ class Ads(models.Model):
     start_date = models.DateTimeField(help_text="Date when the ad starts displaying")
     end_date = models.DateTimeField(help_text="Date when the ad stops displaying")
 
+
+    
+
+
     def save(self, *args, **kwargs):
-        # Automatically update status based on end_date before saving
+        # Ensure end_date is a datetime object
+        if isinstance(self.end_date, str):  # If end_date is a string, convert it
+            try:
+                self.end_date = datetime.fromisoformat(self.end_date)
+            except ValueError:
+                raise ValueError(
+                    "end_date must be in the format 'YYYY-MM-DD HH:MM:SS' or ISO 8601 ('YYYY-MM-DDTHH:MM')"
+                )
+        
+        # Make end_date timezone-aware if it's naive
+        if is_naive(self.end_date):
+            self.end_date = make_aware(self.end_date)
+        
+        # Compare end_date to the current time
         if self.end_date < timezone.now():
             self.status = 'Inactive'
+        
         super().save(*args, **kwargs)
 
     @classmethod

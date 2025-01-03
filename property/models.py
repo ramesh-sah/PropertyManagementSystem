@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models import Q
 from account.models import User
     
 from django.db import models
@@ -28,7 +28,7 @@ class Property(models.Model):
     ]
 
     property_id = models.AutoField(primary_key=True)
-    agent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', limit_choices_to={'user_type': 'agent','user_type': 'admin'})
+    agent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', limit_choices_to=Q(user_type='agent')|Q(user_type= 'admin'))
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=20, choices=PROPERTY_CATEGORIES)
@@ -218,7 +218,7 @@ class PropertyCoupon(models.Model):
         return self.valid_until <= now() + timedelta(days=days)
 
     def __str__(self):
-        return f"Coupon {self.code} for {self.property.name}"
+        return f"Coupon {self.code}"
 
     @classmethod
     def create_coupon(cls, property, code, discount_amount=None, discount_percentage=None, max_uses=1):

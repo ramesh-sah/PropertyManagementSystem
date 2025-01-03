@@ -17,7 +17,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(unique=True,max_length=255, blank=False, null=False)
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
-    profile_picture = models.URLField(blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     is_admin= models.BooleanField(default=False)
     is_active= models.BooleanField(default=True)
     
@@ -49,9 +49,10 @@ class User(AbstractBaseUser):
 
 class UserSocialMediaProfile(models.Model):
     SOCIAL_MEDIA_PLATFORMS = [
-        ('Facebook', 'Facebook'),
-        ('Instagram', 'Instagram'),
-        ('WhatsApp', 'WhatsApp'),
+        ('facebook', 'Facebook'),
+        ('instagram', 'Instagram'),
+        ('whatsApp', 'WhatsApp'),
+        ('linkedin', 'LinkedIn'),
     ]
 
     social_media_id = models.AutoField(primary_key=True)

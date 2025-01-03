@@ -1,5 +1,9 @@
 
+from doctest import debug
 from django.urls import path
+from propertymanagement import settings
+from django.conf.urls.static import static
+
 
 from account.views import  AgentProfileView, CustomerProfileView, UserDashboard, UserLogin, UserLogout,UserRegistration,AgentDashboard,AdminDashboard,AdminAddAgentView,AdminListAgentView,AdminDetailAgentView,AdminAddCustomerView,AdminListCustomerView,AdminDetailCustomerView,AdminProfileView
 
@@ -14,7 +18,7 @@ urlpatterns = [
     path('admin-dashboard/',AdminDashboard.as_view(),name='admin-dashboard'),
     path('admin-add-agent/',AdminAddAgentView.as_view(),name='admin-add-agent'),
     path('admin-list-agent/',AdminListAgentView.as_view(),name='admin-list-agent'),
-    path('admin-detail-agent/',AdminDetailAgentView.as_view(),name='admin-detail-agent'),
+    path('admin-detail-agent/<int:user_id>',AdminDetailAgentView.as_view(),name='admin-detail-agent'),
     path('admin-add-customer/',AdminAddCustomerView.as_view(),name='admin-add-customer'),
     path('admin-list-customer/',AdminListCustomerView.as_view(),name='admin-list-customer'),
     path('admin-detail-customer/',AdminDetailCustomerView.as_view(),name='admin-detail-customer'),

@@ -15,4 +15,4 @@ class ContactUs(models.Model):
     status = models.CharField(max_length=20, default='Pending', help_text="Status of the enquiry (e.g., Pending, Responded)")
 
     def __str__(self):
-        return f"Enquiry from {self.name} (ID: {self.enquiry_id})"
+        return f"Enquiry from {self.name} ({self.email})"

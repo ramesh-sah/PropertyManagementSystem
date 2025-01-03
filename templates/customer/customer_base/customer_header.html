@@ -125,23 +125,16 @@
           <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-end">
               <ul class="navbar-nav header-right">
+                
                 <li class="nav-item dropdown header-profile">
-                  <a
-                    class="nav-link"
-                    href="javascript:void(0);"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                  >
-                    <div class="header-info">
-                      <span class="text-black">Henry Jr.</span>
-                      <p class="fs-12 mb-0">Admin</p>
-                    </div>
-                    <img
-                      src="{% static 'images/profile/17.jpg' %}"
-                      width="20"
-                      alt="/"
-                    />
-                  </a>
+                   <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+									<div class="header-info">
+										
+                                        <span class="text-black">{{user_profile.first_name}} {{user_profile.last_name}}</span>
+										<p class="fs-12 mb-0">{{user_profile.user_type}}</p>
+									</div>
+                                    <img src="{{user_profile.profile_picture.url}}" width="20" alt="/">
+                                </a>
                   <div class="dropdown-menu dropdown-menu-end">
                     <a
                       href='{% url "account:customer-profile" %}'
