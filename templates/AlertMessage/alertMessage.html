@@ -1,0 +1,31 @@
+ <div class="container">
+    {% if messages %}
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            {% for message in messages %}
+                <div class="toast alert-{{ message.tags }} text-black" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">{{message.tags}}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        {{ message|escapejs }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Show toasts
+        let toastElements = document.querySelectorAll('.toast');
+        toastElements.forEach(function (toast) {
+            const bsToast = new bootstrap.Toast(toast, {
+                delay: 5000 // Auto-dismiss after 5 seconds
+            });
+            bsToast.show(); // Show the toast
+        });
+    });
+</script>
+  

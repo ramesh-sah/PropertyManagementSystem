@@ -3,13 +3,14 @@ from django.views import View
 from django.shortcuts import render
 from django.http import Http404
 from propertymanagement.permisssions import IsAdminUser
-
+from django.contrib import messages
 
 
 class LandingPage(View):
    
    def get(self,request,*agrs,**kwargs):
         try:
+            messages.success(request, "Landing Page")
             return render(request,'landing-page.html')
         except:
             return render(request,'error/error_404.html')

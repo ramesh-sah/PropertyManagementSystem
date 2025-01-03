@@ -155,10 +155,11 @@
             <div class="col-lg-8">
               <form
                 class="form-contact contact_form"
-                action="/contact/"
+                
                 method="POST"
-                novalidate="novalidate"
+                
               >
+              {% csrf_token %}
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
@@ -171,6 +172,7 @@
                         onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Enter Message'"
                         placeholder="Enter Message"
+                        required=""
                       ></textarea>
                     </div>
                   </div>
@@ -184,6 +186,7 @@
                         onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Enter your name'"
                         placeholder="Enter your name"
+                        required=""
                       />
                     </div>
                   </div>
@@ -197,6 +200,7 @@
                         onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Enter email address'"
                         placeholder="Email"
+                        required=""
                       />
                     </div>
                   </div>
@@ -210,6 +214,21 @@
                         onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Enter Subject'"
                         placeholder="Enter Subject"
+                        required=""
+                      />
+                    </div>
+                  </div>
+                   <div class="col-12">
+                    <div class="form-group">
+                      <input
+                        class="form-control"
+                        name="phone"
+                        id="subject"
+                        type="numbers"
+                        required=""
+                        onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Enter Number'"
+                        placeholder="Enter Phone Number"
                       />
                     </div>
                   </div>

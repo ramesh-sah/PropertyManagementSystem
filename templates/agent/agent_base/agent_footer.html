@@ -109,5 +109,37 @@
         }
       }, 1000);
     </script>
+    <script>
+    // Get references to checkboxes and the container for URL inputs
+    const checkboxes = document.querySelectorAll('.social-media-checkbox');
+    const socialMediaUrlsDiv = document.getElementById('socialMediaUrls');
+
+    // Event listener for change event on checkboxes
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            // Clear any previously added URL input fields
+            socialMediaUrlsDiv.innerHTML = '';
+
+            // Loop through each checkbox to check which ones are selected
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const platform = checkbox.value;
+                    const label = document.createElement('label');
+                    label.classList.add('form-label');
+                    label.textContent = `Enter your ${platform.charAt(0).toUpperCase() + platform.slice(1)} URL`;
+
+                    const input = document.createElement('input');
+                    input.type = 'url';
+                    input.classList.add('form-control', 'social-media-url');
+                    input.placeholder = `Enter ${platform} URL`;
+
+                    // Append the label and input to the container
+                    socialMediaUrlsDiv.appendChild(label);
+                    socialMediaUrlsDiv.appendChild(input);
+                }
+            });
+        });
+    });
+</script>
 
 </body>

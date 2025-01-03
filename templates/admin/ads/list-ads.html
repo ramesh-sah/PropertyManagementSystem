@@ -1,276 +1,138 @@
 {% extends 'admin/admin_base/admin_base.html' %} {% load static %}
-
 {% block content %}
-
 <div class="content-body">
-            <div class="container-fluid">
-                <div class="page-titles">
-					<ol class="breadcrumb">
-						
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Product List</a></li>
-					</ol>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-5 col-lg-12 col-xl-5">
-                                        <div class="new-arrival-product mb-4 mb-xl-0">
-                                            <div class="new-arrivals-img-contnent">
-                                                <img class="img-fluid rounded" src="{% static 'images/product/2.jpg' %}" alt="/">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-lg-12 col-xl-7">
-                                        <div class="new-arrival-content position-relative">
-                                            <h4><a href="ecom-product-detail.html">Solid Women's V-neck Dark T-Shirt</a></h4>
-                                            <div class="comment-review star-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star grey"></i></li>
-                                                    <li><i class="fa fa-star grey"></i></li>
-                                                </ul>
-                                                <span class="review-text fs-14">(34 reviews) / </span><a class="product-review" href="#"  data-bs-toggle="modal" data-bs-target="#reviewModal">Write a review?</a>
-												<p class="price">$320.00</p>
-                                            </div>
-                                            <p>Availability: <span class="item"> In stock <i class="fa fa-check-circle text-success"></i></span></p>
-                                            <p>Product code: <span class="item">0405689</span> </p>
-                                            <p>Brand: <span class="item">Lee</span></p>
-                                            <p class="text-content">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="container-fluid">
+        <div class="page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Product List</a></li>
+            </ol>
+        </div>
+        
+        <!-- Filter Section -->
+        <div class="row">
+            <div class="col-12">
+                <div class="filter cm-content-box box-primary">
+                    <div class="content-title SlideToolHeader">
+                        <div class="cpa">
+                            <i class="fa-sharp fa-solid fa-filter me-2"></i>Filter
                         </div>
-					</div>
-					<div class="col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-5 col-lg-12 col-xl-5">
-                                        <div class="new-arrival-product mb-4 mb-xl-0">
-                                            <div class="new-arrivals-img-contnent">
-                                                <img class="img-fluid rounded" src="{% static 'images/product/3.jpg' %}" alt="/">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-lg-12 col-xl-7">
-                                        <div class="new-arrival-content position-relative">
-                                            <h4><a href="ecom-product-detail.html">Solid Women's V-neck Dark T-Shirt</a></h4>
-											<div class="comment-review star-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star grey"></i></li>
-                                                    <li><i class="fa fa-star grey"></i></li>
-                                                </ul>
-                                                <span class="review-text fs-14">(34 reviews) / </span><a class="product-review" href="#"  data-bs-toggle="modal" data-bs-target="#reviewModal">Write a review?</a>
-												<p class="price">$325.00</p>
-                                            </div>
-                                            <p>Availability: <span class="item"> In stock <i class="fa fa-check-circle text-success"></i></span></p>
-                                            <p>Product code: <span class="item">0405689</span> </p>
-                                            <p>Brand: <span class="item">Lee</span></p>
-                                            <p class="text-content">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-					</div>
-					<div class="col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-5 col-lg-12 col-xl-5">
-                                        <div class="new-arrival-product mb-4 mb-xl-0">
-                                            <div class="new-arrivals-img-contnent">
-                                                <img class="img-fluid rounded" src="{% static 'images/product/4.jpg' %}" alt="/">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-lg-12 col-xl-7">
-                                        <div class="new-arrival-content position-relative">
-                                            <h4><a href="ecom-product-detail.html">Solid Women's V-neck Dark T-Shirt</a></h4>
-                                            <div class="comment-review star-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                                <span class="review-text fs-14">(34 reviews) / </span><a class="product-review" href="#"  data-bs-toggle="modal" data-bs-target="#reviewModal">Write a review?</a>
-												<p class="price">$480.00</p>
-                                            </div>
-                                            <p>Availability: <span class="item"> In stock <i class="fa fa-check-circle text-success"></i></span></p>
-                                            <p>Product code: <span class="item">0405689</span> </p>
-                                            <p>Brand: <span class="item">Lee</span></p>
-                                            <p class="text-content">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-					</div>
-					<div class="col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row ">
-                                    <div class="col-md-5 col-lg-12 col-xl-5">
-                                        <div class="new-arrival-product mb-4 mb-xl-0">
-                                            <div class="new-arrivals-img-contnent">
-                                                <img class="img-fluid rounded" src="{% static 'images/product/5.jpg' %}" alt="/">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-lg-12 col-xl-7">
-                                        <div class="new-arrival-content position-relative">
-                                            <h4><a href="ecom-product-detail.html">Solid Women's V-neck Dark T-Shirt</a></h4>
-                                            <div class="comment-review star-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                                <span class="review-text fs-14">(34 reviews) / </span><a class="product-review" href="#"  data-bs-toggle="modal" data-bs-target="#reviewModal">Write a review?</a>
-												<p class="price">$658.00</p>
-                                            </div>
-                                            <p>Availability: <span class="item"> In stock <i class="fa fa-check-circle text-success"></i></span></p>
-                                            <p>Product code: <span class="item">0405689</span> </p>
-                                            <p>Brand: <span class="item">Lee</span></p>
-											<p class="text-content">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-					</div>
-					<div class="col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row ">
-                                    <div class="col-md-5 col-lg-12 col-xl-5">
-                                        <div class="new-arrival-product mb-4 mb-xl-0">
-                                            <div class="new-arrivals-img-contnent">
-                                                <img class="img-fluid rounded" src="{% static 'images/product/6.jpg' %}" alt="/">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-lg-12 col-xl-7">
-                                        <div class="new-arrival-content position-relative">
-                                            <h4><a href="ecom-product-detail.html">Solid Women's V-neck Dark T-Shirt</a></h4>
-                                            <div class="comment-review star-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                                <span class="review-text fs-14">(34 reviews) / </span><a class="product-review" href="#"  data-bs-toggle="modal" data-bs-target="#reviewModal">Write a review?</a>
-												<p class="price">$280.00</p>
-                                            </div>
-                                            <p>Availability: <span class="item"> In stock <i class="fa fa-check-circle text-success"></i></span></p>
-                                            <p>Product code: <span class="item">0405689</span> </p>
-                                            <p>Brand: <span class="item">Lee</span></p>
-                                            <p class="text-content">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-					</div>
-					<div class="col-lg-6 col-xl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row ">
-                                    <div class="col-md-5 col-lg-12 col-xl-5">
-                                        <div class="new-arrival-product mb-4 mb-xl-0">
-                                            <div class="new-arrivals-img-contnent">
-                                                <img class="img-fluid rounded" src="{% static 'images/product/7.jpg' %}" alt="/">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-lg-12 col-xl-7">
-                                        <div class="new-arrival-content position-relative">
-                                            <h4><a href="ecom-product-detail.html">Solid Women's V-neck Dark T-Shirt</a></h4>
-                                            <div class="comment-review star-rating">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                                <span class="review-text fs-14">(34 reviews) / </span><a class="product-review" href="#"  data-bs-toggle="modal" data-bs-target="#reviewModal">Write a review?</a>
-												<p class="price">$600.00</p>
-                                            </div>
-                                            <p>Availability: <span class="item"> In stock <i class="fa fa-check-circle text-success"></i></span></p>
-                                            <p>Product code: <span class="item">0405689</span> </p>
-                                            <p>Brand: <span class="item">Lee</span></p>
-                                            <p class="text-content">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="tools">
+                            <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
                         </div>
                     </div>
-					<!-- review -->
-					<div class="modal fade" id="reviewModal">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title">Review</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal">
-									</button>
-								</div>
-								<div class="modal-body">
-									<form>
-										<div class="text-center mb-4">
-											<img class="img-fluid rounded" width="78" src="{% static 'images/avatar/1.jpg' %}" alt="DexignZone">
-										</div>
-										<div class="form-group">
-											<div class="rating-widget mb-4 text-center">
-												<!-- Rating Stars Box -->
-												<div class="rating-stars">
-													<ul id="stars">
-														<li class="star" title="Poor" data-value="1">
-															<i class="fa fa-star fa-fw"></i>
-														</li>
-														<li class="star" title="Fair" data-value="2">
-															<i class="fa fa-star fa-fw"></i>
-														</li>
-														<li class="star" title="Good" data-value="3">
-															<i class="fa fa-star fa-fw"></i>
-														</li>
-														<li class="star" title="Excellent" data-value="4">
-															<i class="fa fa-star fa-fw"></i>
-														</li>
-														<li class="star" title="WOW!!!" data-value="5">
-															<i class="fa fa-star fa-fw"></i>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="mb-3">
-											<textarea class="form-control" placeholder="Comment" rows="5"></textarea>
-										</div>
-										<button class="btn btn-success btn-block">RATE</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
+                    <div class="cm-content-body form excerpt">
+                        <div class="card-body">
+                            <form method="get">
+                                <div class="row">
+                                    <div class="mb-3 col-lg-3 col-md-6">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            name="keyword"
+                                            placeholder="Enter Your Keyword..."
+                                            value="{{ keyword }}"
+                                        />
+                                    </div>
+                                    <div class="mb-3 col-lg-3 col-md-6">
+                                        <select class="default-select form-control wide" name="location">
+                                            <option value="">Select Location</option>
+                                            <option value="London" {% if location == "London" %}selected{% endif %}>London</option>
+                                            <option value="Paris" {% if location == "Paris" %}selected{% endif %}>Paris</option>
+                                            <option value="California" {% if location == "California" %}selected{% endif %}>California</option>
+                                            <option value="Indonesia" {% if location == "Indonesia" %}selected{% endif %}>Indonesia</option>
+                                            <option value="Iraq" {% if location == "Iraq" %}selected{% endif %}>Iraq</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-lg-3 col-md-6">
+                                        <select class="default-select form-control wide" name="property_type">
+                                            <option value="">Property Type</option>
+                                            <option value="Wide Area" {% if property_type == "Wide Area" %}selected{% endif %}>Wide Area</option>
+                                            <option value="Building" {% if property_type == "Building" %}selected{% endif %}>Building</option>
+                                            <option value="Commercial" {% if property_type == "Commercial" %}selected{% endif %}>Commercial</option>
+                                            <option value="Residential" {% if property_type == "Residential" %}selected{% endif %}>Residential</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-lg-3 col-md-6">
+                                        <select class="default-select form-control wide" name="category">
+                                            <option value="">Select Category</option>
+                                            <option value="For Rent" {% if category == "For Rent" %}selected{% endif %}>For Rent</option>
+                                            <option value="For Sale" {% if category == "For Sale" %}selected{% endif %}>For Sale</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4 col-md-6 align-self-end mb-3 offset-lg-8">
+                                        <button
+                                            class="btn btn-primary rounded-sm w-100"
+                                            title="Click here to Search"
+                                            type="submit"
+                                        >
+                                            <i class="fa fa-search me-1"></i>Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    
+
+        <!-- Ads List Section -->
+        <div class="container mt-4">
+            <h1 class="mb-4">Ads List</h1>
+            <div class="row">
+                {% for ad in ads %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if ad.image %}
+                        <img src="{{ ad.image.url }}" class="card-img-top" alt="{{ ad.title }}" />
+                        {% else %}
+                        <img src="{% static 'images/profile/small/pic2.jpg' %}" alt="Default Image" />
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ ad.title }}</h5>
+                            <p class="card-text">{{ ad.description|truncatewords:20 }}</p>
+                            <p class="card-text"><small class="text-muted">Start: {{ ad.start_date }}</small></p>
+                            <p class="card-text"><small class="text-muted">End: {{ ad.end_date }}</small></p>
+                            <a href="{{ ad.url }}" class="btn btn-primary" target="_blank">View Ad</a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <p>No ads available.</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if ads.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ ads.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    {% for page in ads.paginator.page_range %}
+                    <li class="page-item {% if ads.number == page %}active{% endif %}">
+                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                    </li>
+                    {% endfor %}
+                    
+                    {% if ads.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ ads.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
 {% endblock content %}
-    
