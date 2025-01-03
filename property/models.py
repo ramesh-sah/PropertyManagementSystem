@@ -1,13 +1,13 @@
 from django.db import models
 
 from account.models import User
-    
+
 from django.db import models
 from django.utils.timezone import now
 from datetime import timedelta
 
-# Create your models here.
 
+# Create your models here.
 
 
 class Property(models.Model):
@@ -28,7 +28,8 @@ class Property(models.Model):
     ]
 
     property_id = models.AutoField(primary_key=True)
-    agent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', limit_choices_to={'user_type': 'agent','user_type': 'admin'})
+    agent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties',
+                              limit_choices_to={'user_type': 'agent', 'user_type': 'admin'})
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=20, choices=PROPERTY_CATEGORIES)
@@ -39,8 +40,7 @@ class Property(models.Model):
 
     def __str__(self):
         return self.title
-    
-    
+
 
 class PropertyListingDetail(models.Model):
     listing_id = models.AutoField(primary_key=True)
@@ -54,29 +54,27 @@ class PropertyListingDetail(models.Model):
 
     def __str__(self):
         return f"Listing Details for {self.property.title}"
-    
-    
-    
+
+
 class PropertyMedia(models.Model):
     media_id = models.AutoField(primary_key=True)
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='media')
     image_title = models.CharField(max_length=255, blank=True, null=True, help_text="Title for the image")
-    image = models.ImageField(upload_to='images/', help_text="Upload an image" ,null=True, blank=True)
-    video = models.FileField(upload_to='videos/', blank=True, null=True, help_text="Upload a video",)
+    image = models.ImageField(upload_to='images/', help_text="Upload an image", null=True, blank=True)
+    video = models.FileField(upload_to='videos/', blank=True, null=True, help_text="Upload a video", )
     video_title = models.CharField(max_length=255, blank=True, null=True, help_text="Title for the video")
 
     def __str__(self):
         return f"{self.image_title or self.video_title} for {self.property.title}"
 
 
-
 class PropertyAmenities(models.Model):
     amenity_id = models.AutoField(primary_key=True)
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='amenities')
-    amenities_status=models.BooleanField(default=True)
+    amenities_status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
     ac = models.BooleanField(default=False, help_text="A/C available")
     heating = models.BooleanField(default=False, help_text="Heating available")
     garage = models.BooleanField(default=False, help_text="Garage available")
@@ -87,7 +85,8 @@ class PropertyAmenities(models.Model):
     disabled_access = models.BooleanField(default=False, help_text="Disabled access available")
     lift = models.BooleanField(default=False, help_text="Lift available")
     pet_friendly = models.BooleanField(default=False, help_text="Pet friendly")
-    ceiling_height = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, help_text="Ceiling height in feet")
+    ceiling_height = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True,
+                                         help_text="Ceiling height in feet")
     outdoor_shower = models.BooleanField(default=False, help_text="Outdoor shower available")
     refrigerator = models.BooleanField(default=False, help_text="Refrigerator available")
     wifi = models.BooleanField(default=False, help_text="Wi-Fi available")
@@ -96,13 +95,10 @@ class PropertyAmenities(models.Model):
     laundry_dryer = models.BooleanField(default=False, help_text="Laundry dryer available")
     lawn = models.BooleanField(default=False, help_text="Lawn available")
     elevator = models.BooleanField(default=False, help_text="Elevator available")
-    
 
     def __str__(self):
         return f"Amenities for {self.property.title}"
-    
-    
-    
+
 
 class PropertyAddress(models.Model):
     address_id = models.AutoField(primary_key=True)
@@ -112,13 +108,14 @@ class PropertyAddress(models.Model):
     city = models.CharField(max_length=100, help_text="City name")
     zip_code = models.CharField(max_length=20, help_text="Zip code")
     state = models.CharField(max_length=100, help_text="State name")
-    latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True, help_text="Latitude for location")
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True, help_text="Longitude for location")
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True,
+                                   help_text="Latitude for location")
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True,
+                                    help_text="Longitude for location")
 
     def __str__(self):
         return f"Address for {self.property.title}: {self.address}, {self.city}, {self.state}, {self.country}"
-    
-    
+
 
 # Create your models here.
 class PropertyEnquiry(models.Model):
@@ -132,14 +129,12 @@ class PropertyEnquiry(models.Model):
     message = models.TextField(help_text="Detailed message of the enquiry")
     created_at = models.DateTimeField(auto_now_add=True, help_text="Date when the enquiry was created")
     updated_at = models.DateTimeField(auto_now=True, help_text="Date when the enquiry was last updated")
-    status = models.CharField(max_length=20, default='Pending', help_text="Status of the enquiry (e.g., Pending, Responded)")
+    status = models.CharField(max_length=20, default='Pending',
+                              help_text="Status of the enquiry (e.g., Pending, Responded)")
 
     def __str__(self):
         return f"Enquiry from {self.name} (ID: {self.enquiry_id})"
-    
-    
-    
-    
+
 
 class PropertyCoupon(models.Model):
     """Model representing a discount coupon for a property."""
@@ -155,7 +150,7 @@ class PropertyCoupon(models.Model):
     discount_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     valid_from = models.DateTimeField(default=now)
-    valid_until = models.DateTimeField(default= now() + timedelta(days=30))  # Default validity: 30 days
+    valid_until = models.DateTimeField(default=now() + timedelta(days=30))  # Default validity: 30 days
     max_uses = models.PositiveIntegerField(default=1)  # Maximum times the coupon can be used
     uses = models.PositiveIntegerField(default=0)  # Tracks how many times the coupon has been used
     is_active = models.BooleanField(default=True)
@@ -192,9 +187,9 @@ class PropertyCoupon(models.Model):
         - Not exceeding max uses
         """
         return (
-            self.is_active and
-            self.valid_from <= now() <= self.valid_until and
-            self.uses < self.max_uses
+                self.is_active and
+                self.valid_from <= now() <= self.valid_until and
+                self.uses < self.max_uses
         )
 
     def use_coupon(self):

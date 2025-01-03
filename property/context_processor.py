@@ -1,4 +1,6 @@
 from .models import *
+
+
 def properties(request):
     properties = Property.objects.all()  # Fetch all properties
     propertyamenities = PropertyAmenities.objects.all()  # Fetch all properties amenities
