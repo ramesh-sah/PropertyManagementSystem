@@ -116,11 +116,11 @@ class UserLogin(View):
             
 
             if user.user_type == 'admin':
-                return redirect("account:admin-dashboard")
+                return redirect("property:admin-list-property")
             elif user.user_type == 'agent':
-                return redirect("account:agent-dashboard")
+                return redirect("property:agent-list-property")
             elif user.user_type == 'customer':
-                return redirect("account:user-dashboard")
+                return redirect("property:customer-list-property")
             else:
                 return redirect("account:user-register")
         else:

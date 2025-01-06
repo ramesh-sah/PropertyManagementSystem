@@ -68,6 +68,12 @@ class AdminAdsListView(View):
         # Fetch all ads, ordered by newest first
         ads = Ads.objects.all().order_by('-created_at')
         
+        # Apply filters based on query parameters
+        title = request.GET.get('title')  # e.g., "Active", "Inactive"
+        status = request.GET.get('status')  # e.g., "YYYY-MM-DD"
+        # end_date = request.GET.get('end_date')  # e.g., "YYYY-MM-DD"
+        print(title)
+        
         
         
         # Pagination setup

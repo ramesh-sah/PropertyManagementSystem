@@ -14,14 +14,77 @@
                 <div class="row">
 					<div class="col-xl-12">
 						<div class="filter cm-content-box box-primary">
-							<div class="content-title SlideToolHeader collapse">
-								<div class="cpa">
-									<i class="fa-sharp fa-solid fa-filter me-2"></i>Filter
-								</div>
-								<div class="tools">
-									<a href="javascript:void(0);" class="handle collapse"><i class="fal fa-angle-down"></i></a>
-								</div>
-							</div>
+							   
+        <!-- Filter Section -->
+        <div class="row">
+            <div class="col-12">
+                <div class="filter cm-content-box box-primary">
+                    <div class="content-title SlideToolHeader">
+                        <div class="cpa">
+                            <i class="fa-sharp fa-solid fa-filter me-2"></i>Filter
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                        </div>
+                    </div>
+                    <div class="cm-content-body form excerpt">
+                        <div class="card-body">
+                            <form method="get">
+                                <div class="row">
+                                    <div class="mb-3 col-lg-3 col-md-6">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            name="keyword"
+                                            placeholder="Enter Your Keyword..."
+                                            value="{{ keyword }}"
+                                        />
+                                    </div>
+                                    <div class="mb-3 col-lg-3 col-md-6">
+                                        <select class="default-select form-control wide" name="location">
+                                            <option value="">Select Location</option>
+                                            <option value="London" {% if location == "London" %}selected{% endif %}>London</option>
+                                            <option value="Paris" {% if location == "Paris" %}selected{% endif %}>Paris</option>
+                                            <option value="California" {% if location == "California" %}selected{% endif %}>California</option>
+                                            <option value="Indonesia" {% if location == "Indonesia" %}selected{% endif %}>Indonesia</option>
+                                            <option value="Iraq" {% if location == "Iraq" %}selected{% endif %}>Iraq</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-lg-3 col-md-6">
+                                        <select class="default-select form-control wide" name="property_type">
+                                            <option value="">Property Type</option>
+                                            <option value="Wide Area" {% if property_type == "Wide Area" %}selected{% endif %}>Wide Area</option>
+                                            <option value="Building" {% if property_type == "Building" %}selected{% endif %}>Building</option>
+                                            <option value="Commercial" {% if property_type == "Commercial" %}selected{% endif %}>Commercial</option>
+                                            <option value="Residential" {% if property_type == "Residential" %}selected{% endif %}>Residential</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-lg-3 col-md-6">
+                                        <select class="default-select form-control wide" name="category">
+                                            <option value="">Select Category</option>
+                                            <option value="For Rent" {% if category == "For Rent" %}selected{% endif %}>For Rent</option>
+                                            <option value="For Sale" {% if category == "For Sale" %}selected{% endif %}>For Sale</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4 col-md-6 align-self-end mb-3 offset-lg-8">
+                                        <button
+                                            class="btn btn-primary rounded-sm w-100"
+                                            title="Click here to Search"
+                                            type="submit"
+                                        >
+                                            <i class="fa fa-search me-1"></i>Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 							<div class="cm-content-body form excerpt" style="display: none;">
 								<div class="card-body">
 									<div class="row">
